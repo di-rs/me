@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import BaseHead from "./BaseHead.astro";
 import Footer from "./Footer.astro";
+import Nav from "./Nav.astro";
 
 interface Props {
   title?: string;
@@ -12,8 +13,8 @@ interface Props {
 <!doctype html>
 <html lang="en" data-theme="dark">
   <BaseHead {...Astro.props} />
-  <body>
-    <nav></nav>
+  <body class="bg-gray-9">
+    <Nav />
     <main class="grid gap-8 items-start">
       <slot />
     </main>
@@ -47,7 +48,13 @@ interface Props {
       return `${color}-${number}`;
     }
 
-    root.style.setProperty("--color-bg-selection", `var(--${getRandomColor()})`);
-    root.style.setProperty("--color-text-selection", `var(--${getRandomColor()})`);
+    root.style.setProperty(
+      "--color-bg-selection",
+      `var(--${getRandomColor()})`,
+    );
+    root.style.setProperty(
+      "--color-text-selection",
+      `var(--${getRandomColor()})`,
+    );
   }
 </script>

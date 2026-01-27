@@ -1,10 +1,7 @@
-@layer theme, base, components, utilities;
+@import "tailwindcss";
 
 @import "open-props/style";
-@import "open-props/normalize";
-
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+/* @import "open-props/normalize"; */
 
 @theme {
   /* ===== GRAY ===== */
