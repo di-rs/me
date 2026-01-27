@@ -1,0 +1,13 @@
+<footer class="p-3 grid place-items-center bg-gray-10">
+  <div class="text-sm">
+    &copy; <span id="copyright">{new Date().getFullYear()}</span> Dmitriy Popov. All rights reserved. I'm a skilled web developer <br /> with
+    a pation to imperfection.
+  </div>
+</footer>
+
+<script>
+  const copyright = document.getElementById("copyright")
+  if (copyright) {
+    copyright.textContent = "" + new Date().getFullYear()
+  }
+</script>
