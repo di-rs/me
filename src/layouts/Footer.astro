@@ -1,6 +1,6 @@
 ---
 import MetallicBorder from "../components/MetallicBorder.vue";
-import { siteData, social } from "../data/siteData";
+import { baseData, social } from "../data/siteData";
 
 const iconPaths = {
   github:
@@ -18,7 +18,7 @@ const iconPaths = {
     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
       <div class="text-xs text-text-muted opacity-60">
         &copy; {new Date().getFullYear()}
-        {siteData.author}
+        {baseData.author}
       </div>
 
       <div class="flex items-center gap-6">

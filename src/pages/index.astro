@@ -5,13 +5,13 @@ import ProfileCanvas from "@/components/ProfileCanvas.vue";
 ---
 
 <Layout>
-  <section class="px-6 md:px-24 max-w-7xl mx-auto py-16 md:py-24">
+  <section class="px-6 md:px-24 max-w-7xl mx-auto py-4 md:py-24">
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div class="flex justify-center">
         <ProfileCanvas client:only="vue" />
       </div>
 
-      <HeroSection client:visible />
+      <HeroSection client:only="vue" />
     </div>
   </section>
 </Layout>
