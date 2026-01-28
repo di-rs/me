@@ -1,7 +1,7 @@
 <template>
   <div
     :class="position === 'bottom' ? 'bottom-0' : 'top-0'"
-    class="absolute left-0 right-0 h-[1px] pointer-events-none"
+    class="absolute left-0 right-0 h-px pointer-events-none"
   >
     <div
       class="absolute inset-0 animate-shimmer"
