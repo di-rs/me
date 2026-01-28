@@ -2,8 +2,9 @@
   <component
     :is="href ? 'a' : 'button'"
     :href="href"
-    :target="href ? '_blank' : undefined"
-    :rel="href ? 'noopener noreferrer' : undefined"
+    :download="download"
+    :target="href && !download ? '_blank' : undefined"
+    :rel="href && !download ? 'noopener noreferrer' : undefined"
     class="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-medium transition-all duration-300 rounded-md overflow-hidden"
     :class="buttonClasses"
   >
@@ -24,8 +25,8 @@
     <!-- Border shimmer for secondary -->
     <div
       v-if="variant === 'secondary'"
-      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-      style="background: linear-gradient(90deg, transparent, rgba(163, 163, 163, 0.3), transparent); animation: shimmer-slide 2s ease-in-out infinite;"
+      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+      style="background: linear-gradient(90deg, transparent, rgba(163, 163, 163, 0.15), transparent); animation: shimmer-slide 3s ease-in-out infinite;"
     />
 
     <span class="relative z-10 flex items-center gap-2">
@@ -40,17 +41,19 @@ import { computed } from 'vue';
 interface Props {
   variant?: 'primary' | 'secondary';
   href?: string;
+  download?: boolean | string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
+  download: false,
 });
 
 const buttonClasses = computed(() => {
   if (props.variant === 'primary') {
     return 'text-bg-primary shadow-lg shadow-text-primary/20 hover:shadow-xl hover:shadow-text-primary/30 hover:scale-[1.02]';
   }
-  return 'border border-border-muted text-text-primary hover:border-text-secondary hover:bg-bg-tertiary backdrop-blur-sm';
+  return 'border border-border-muted text-text-secondary hover:border-text-muted hover:text-text-primary hover:bg-bg-secondary backdrop-blur-sm';
 });
 </script>
 
