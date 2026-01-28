@@ -14,15 +14,18 @@
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/svelte": "^7.2.5",
+    "@astrojs/vue": "^5.1.4",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.16.15",
+    "motion-v": "^1.10.2",
     "open-props": "^1.7.17",
     "p5": "^2.2.0",
     "svelte": "^5.48.4",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vue": "^3.5.27"
   },
   "devDependencies": {
     "prettier": "^3.8.1",
