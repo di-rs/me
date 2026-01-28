@@ -16,13 +16,14 @@ import { hero, social } from "../data/siteData";
 
   <div class="flex flex-wrap gap-4">
     <ShimmerButton
+      client:only="vue"
       variant="primary"
       href="https://drive.google.com/uc?export=download&id=17-z7Vpdw0bRPproFqa6HorcKx-otFV1e"
       download="Dmitriy_Popov_CV.pdf"
     >
       {hero.cta.primary}
     </ShimmerButton>
-    <ShimmerButton variant="secondary" href={social.linkedin}>
+    <ShimmerButton client:only="vue" variant="secondary" href={social.linkedin}>
       {hero.cta.secondary}
     </ShimmerButton>
   </div>
