@@ -19,6 +19,7 @@
     "@types/react-dom": "^19.2.3",
     "astro": "^5.16.15",
     "open-props": "^1.7.17",
+    "p5": "^2.2.0",
     "svelte": "^5.48.4",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"

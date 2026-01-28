@@ -2,24 +2,24 @@
 
 ---
 
-<nav class="p-3 grid place-items-center bg-gray-9">
-  <ul class="container list-none items-center flex gap-12">
+<nav class="py-6 border-b border-border-subtle backdrop-blur-sm relative z-10">
+  <ul class="px-6 md:px-24 max-w-7xl mx-auto list-none items-center flex gap-8 md:gap-12">
     <li class="mr-auto">
-      <a href="/">
-        <img src="/favicon.svg" width={42} />
+      <a href="/" class="flex items-center gap-2 text-text-primary hover:opacity-80 transition-opacity">
+        <img src="/favicon.svg" width={32} height={32} alt="Logo" class="opacity-90" />
       </a>
     </li>
 
-    <li class="ml-full">
-      <a class="text-sky-600 hover:text-sky-300" href="/portfolio"> Portfolio </a>
+    <li>
+      <a class="text-sm text-text-secondary hover:text-text-primary transition-colors" href="/portfolio">Portfolio</a>
     </li>
 
     <li>
-      <span class="cursor-not-allowed text-gray-8"> Chat w/ Dima (WIP) </span>
+      <span class="text-sm text-text-muted cursor-not-allowed">Chat w/ Dima</span>
     </li>
 
     <li>
-      <a  class="text-sky-600 hover:text-sky-300" href="http://code.dimaportish.com">Beauty Of Code</a>
+      <a class="text-sm text-text-secondary hover:text-text-primary transition-colors" href="http://code.dimaportish.com">Beauty Of Code</a>
     </li>
   </ul>
 </nav>
