@@ -1,20 +1,19 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 
-import svelte from "@astrojs/svelte";
 import vue from "@astrojs/vue";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [svelte(), vue()],
+  integrations: [vue()],
 
   vite: {
-    plugins: [tailwindcss()],
-    ssr: {
-      noExternal: [],
-      external: ["p5"],
-    },
+    plugins: [tailwindcss()]
   },
+
+  adapter: cloudflare(),
 });
