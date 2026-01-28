@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import HeroSection from "@/components/HeroSection.vue";
+import HeroSection from "@/components/HeroSection.astro";
 import ProfileCanvas from "@/components/ProfileCanvas.vue";
 ---
 
@@ -11,7 +11,7 @@ import ProfileCanvas from "@/components/ProfileCanvas.vue";
         <ProfileCanvas client:only="vue" />
       </div>
 
-      <HeroSection client:only="vue" />
+      <HeroSection />
     </div>
   </section>
 </Layout>

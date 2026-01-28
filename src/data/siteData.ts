@@ -18,5 +18,5 @@ export const hero = {
 export const social = {
   github: "https://github.com/di-rs",
   linkedin: "https://linkedin.com/in/popov-dmitriy",
-  email: "mailto:popov.dmitriiy@gmail.com",
+  email: "mailto:ai@dimaportish.com",
 };

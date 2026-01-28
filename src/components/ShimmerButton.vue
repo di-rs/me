@@ -11,7 +11,7 @@
     <!-- Animated background gradient -->
     <div
       v-if="variant === 'primary'"
-      class="absolute inset-0 bg-gradient-to-r from-text-primary via-text-secondary to-text-primary bg-[length:200%_100%] transition-all duration-500 group-hover:bg-[length:100%_100%]"
+      class="absolute inset-0 bg-linear-to-r from-text-primary via-text-secondary to-text-primary bg-[length:200%_100%] transition-all duration-500 group-hover:bg-[length:100%_100%]"
       style="animation: gradient-shift 3s ease infinite"
     />
 

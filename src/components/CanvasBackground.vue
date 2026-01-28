@@ -56,7 +56,7 @@ onMounted(() => {
 
         // Draw particle
         p.noStroke();
-        p.fill(163, 163, 163, 38);
+        p.fill(163, 163, 163, 65);
         p.circle(particle.x, particle.y, particle.size);
 
         // Draw connections
@@ -64,7 +64,7 @@ onMounted(() => {
           const distance = p.dist(particle.x, particle.y, other.x, other.y);
 
           if (distance < 150) {
-            const alpha = p.map(distance, 0, 150, 20, 0);
+            const alpha = p.map(distance, 0, 150, 40, 0);
             p.stroke(163, 163, 163, alpha);
             p.strokeWeight(0.5);
             p.line(particle.x, particle.y, other.x, other.y);
