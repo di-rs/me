@@ -2,14 +2,14 @@
   <div
     ref="container"
     class="fixed inset-0 w-full h-full pointer-events-none"
-    style="z-index: 0;"
+    style="z-index: 0"
     aria-hidden="true"
   ></div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import p5 from 'p5';
+import { onMounted, ref } from "vue";
+import p5 from "p5";
 
 interface Particle {
   x: number;

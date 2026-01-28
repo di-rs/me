@@ -14,7 +14,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     ssr: {
       noExternal: [],
-      external: ['p5']
-    }
-  }
+      external: ["p5"],
+    },
+  },
 });

@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import p5 from 'p5';
+import { onMounted, ref } from "vue";
+import p5 from "p5";
 
 interface Particle {
   angle: number;
@@ -35,14 +35,14 @@ const triggerWave = () => {
   const centerX = rect.left + rect.width / 2;
   const centerY = rect.top + rect.height / 2;
 
-  const waveDiv = document.createElement('div');
-  waveDiv.style.position = 'fixed';
-  waveDiv.style.top = '0';
-  waveDiv.style.left = '0';
-  waveDiv.style.width = '100vw';
-  waveDiv.style.height = '100vh';
-  waveDiv.style.pointerEvents = 'none';
-  waveDiv.style.zIndex = '5';
+  const waveDiv = document.createElement("div");
+  waveDiv.style.position = "fixed";
+  waveDiv.style.top = "0";
+  waveDiv.style.left = "0";
+  waveDiv.style.width = "100vw";
+  waveDiv.style.height = "100vh";
+  waveDiv.style.pointerEvents = "none";
+  waveDiv.style.zIndex = "5";
   document.body.appendChild(waveDiv);
 
   const sketch = (p: p5) => {
@@ -55,7 +55,7 @@ const triggerWave = () => {
       // Create initial wave ring
       waveRings.push({
         radius: 160,
-        alpha: 100
+        alpha: 100,
       });
     };
 

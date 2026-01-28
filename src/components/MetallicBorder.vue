@@ -22,12 +22,12 @@
 
 <script setup lang="ts">
 interface Props {
-  position?: 'top' | 'bottom';
+  position?: "top" | "bottom";
   delay?: number;
 }
 
 withDefaults(defineProps<Props>(), {
-  position: 'bottom',
+  position: "bottom",
   delay: 0,
 });
 </script>
