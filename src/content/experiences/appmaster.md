@@ -12,12 +12,8 @@ technologies:
 order: 5
 ---
 
-Worked on establishing new interface, UI kit using Ant design
-
-Developed architecture for all core modules in the project
-
-Worked on business development of the project from the tech side
-
-Communication with the development team: backend, designers, product managers, QA
-
-Code refactoring
+- Worked on establishing new interface, UI kit using Ant design
+- Developed architecture for all core modules in the project
+- Worked on business development of the project from the tech side
+- Communication with the development team: backend, designers, product managers, QA
+- Code refactoring

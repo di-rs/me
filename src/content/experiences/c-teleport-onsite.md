@@ -15,14 +15,9 @@ technologies:
 order: 2
 ---
 
-Core maintainer of UI Kit
-
-Close collaboration with designers to improve internal Design System
-
-Creating roadmaps for UI Kit growth, participate in planing sessions and make decisions on it
-
-Developing features and modules in the main app
-
-Adopting new technologies, keep codebase fresh and maintainable
-
-Code review, refactoring, managing microfrontend apps
+- Core maintainer of UI Kit
+- Close collaboration with designers to improve internal Design System
+- Creating roadmaps for UI Kit growth, participate in planing sessions and make decisions on it
+- Developing features and modules in the main app
+- Adopting new technologies, keep codebase fresh and maintainable
+- Code review, refactoring, managing microfrontend apps

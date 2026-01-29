@@ -10,7 +10,6 @@ export interface Experience {
   companyLogo?: string | undefined;
   companyUrl?: string | undefined;
   projectUrls?: { name: string; url: string }[] | undefined;
-  achievements?: string[] | undefined;
   employmentType?: string | undefined; // e.g., "Full-time", "Contract", "Remote", "Hybrid"
 }
 
@@ -28,7 +27,6 @@ export interface GroupedExperience {
     endDate: string | null;
     description: string[];
     technologies: string[];
-    achievements?: string[] | undefined;
     employmentType?: string | undefined;
   }[];
 }

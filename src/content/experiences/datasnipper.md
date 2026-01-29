@@ -15,12 +15,8 @@ technologies:
 order: 1
 ---
 
-AI Enthusiast, hugely leveraging AI tools for efficiency
-
-Building separate POC apps and features for alpha test users
-
-Creator and Maintainer of internal WYSIWYG (Notion-like) editor, that is used in different constraints
-
-Developing new business features and modules in internal/external audit domain
-
-UI Kit contributor
+- AI Enthusiast, hugely leveraging AI tools for efficiency
+- Building separate POC apps and features for alpha test users
+- Creator and Maintainer of internal WYSIWYG (Notion-like) editor, that is used in different constraints
+- Developing new business features and modules in internal/external audit domain
+- UI Kit contributor

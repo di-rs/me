@@ -13,7 +13,12 @@ const allExperiences: Experience[] = experienceEntries
   .map((entry: any) => ({
     id: entry.id,
     ...entry.data,
-    description: entry.body.trim().split('\n\n').filter((line: string) => line.trim()),
+    description:
+      entry.body
+        ?.trim()
+        .split("\n")
+        .filter((line: string) => line.trim().startsWith("-"))
+        .map((line: string) => line.trim().substring(1).trim()) || "",
   }));
 
 // Group experiences by company
@@ -27,7 +32,9 @@ const experiences = groupExperiencesByCompany(allExperiences);
   <div class="relative w-full p-0 bg-bg-primary min-h-screen">
     <!-- Section Header -->
     <div class="text-center mb-6 px-8 pt-4">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-text-primary mb-1 tracking-tight">
+      <h2
+        class="text-3xl md:text-4xl font-extrabold text-text-primary mb-1 tracking-tight"
+      >
         Experience
       </h2>
       <p class="text-[0.9375rem] text-text-secondary font-normal">
@@ -36,7 +43,9 @@ const experiences = groupExperiencesByCompany(allExperiences);
     </div>
 
     <!-- Timeline Container -->
-    <div class="relative max-w-[1200px] mx-auto px-4 md:px-16 py-8 min-h-screen">
+    <div
+      class="relative max-w-[1200px] mx-auto px-4 md:px-16 py-8 min-h-screen"
+    >
       <ExperienceTimeline client:only="vue" experiences={experiences} />
     </div>
   </div>

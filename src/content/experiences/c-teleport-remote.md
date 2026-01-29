@@ -13,12 +13,8 @@ technologies:
 order: 3
 ---
 
-Working on the main company app for flights bookings
-
-Separating the main app into micro frontends
-
-Creating architecture and developing an internal UI Kit for the company
-
-Developing and maintaining the core modules of the system
-
-Code review
+- Working on the main company app for flights bookings
+- Separating the main app into micro frontends
+- Creating architecture and developing an internal UI Kit for the company
+- Developing and maintaining the core modules of the system
+- Code review
