@@ -39,10 +39,10 @@ import { onMounted, onUnmounted, ref } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TimelineCard from "./TimelineCard.vue";
-import type { Experience } from "@/data/experience";
+import type { DisplayExperience } from "@/utils/experience";
 
 interface Props {
-  experiences: Experience[];
+  experiences: DisplayExperience[];
 }
 
 const props = defineProps<Props>();

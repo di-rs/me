@@ -25,68 +25,172 @@
         />
       </div>
 
-      <!-- Date Range -->
-      <div class="mb-3 stagger-item">
-        <span
-          class="text-text-secondary text-sm font-semibold tracking-wider uppercase"
-          >{{ formatDateRange() }}</span
-        >
-      </div>
-
-      <!-- Role & Company -->
-      <h3
-        class="text-2xl md:text-xl font-bold text-text-primary mb-2 leading-tight stagger-item"
+      <!-- Company Name & Location (for merged experiences) -->
+      <div
+        v-if="hasMultipleRoles && isGroupedExperience(experience)"
+        class="mb-5 stagger-item"
       >
-        {{ experience.role }}
-      </h3>
-      <div class="flex flex-col gap-1 mb-5 stagger-item">
-        <span class="text-text-primary text-lg font-semibold">{{
-          experience.company
-        }}</span>
+        <h3
+          class="text-2xl md:text-xl font-bold text-text-primary mb-2 leading-tight"
+        >
+          {{ experience.company }}
+        </h3>
         <span class="text-text-secondary text-sm">{{
           experience.location
         }}</span>
       </div>
 
-      <!-- Description -->
-      <ul class="list-none m-0 mb-6 p-0 stagger-item">
-        <li
-          v-for="(item, idx) in experience.description"
-          :key="idx"
-          class="text-text-secondary text-[0.9375rem] leading-relaxed mb-2 pl-5 relative before:content-['•'] before:absolute before:left-0 before:text-text-subtle"
+      <!-- Single Role Experience -->
+      <div v-if="!hasMultipleRoles">
+        <!-- Role Title -->
+        <h3
+          class="text-2xl md:text-xl font-bold text-text-primary mb-2 leading-tight stagger-item"
         >
-          {{ item }}
-        </li>
-      </ul>
+          {{ !isGroupedExperience(experience) ? experience.role : "" }}
+        </h3>
 
-      <!-- Technologies -->
-      <div class="flex flex-wrap gap-2 mb-4 stagger-item">
-        <span
-          v-for="tech in experience.technologies"
-          :key="tech"
-          class="tech-tag px-3 py-1.5 bg-bg-primary border border-border-muted rounded-md text-[0.8125rem] text-text-secondary font-medium transition-all duration-200 hover:bg-bg-hover hover:border-border-strong hover:text-text-primary hover:-translate-y-0.5"
+        <!-- Date Range & Employment Type -->
+        <div
+          class="flex items-center gap-2 text-text-secondary text-sm mb-2 stagger-item"
         >
-          {{ tech }}
-        </span>
-      </div>
-
-      <!-- Achievements (if any) -->
-      <div
-        v-if="experience.achievements"
-        class="mt-4 pt-4 border-t border-border-muted stagger-item"
-      >
-        <div class="text-text-primary text-sm font-semibold mb-2">
-          Key Achievements:
-        </div>
-        <ul class="list-none m-0 p-0">
-          <li
-            v-for="(achievement, idx) in experience.achievements"
-            :key="idx"
-            class="text-text-secondary text-sm leading-relaxed mb-1 pl-4 relative before:content-['✓'] before:absolute before:left-0 before:text-success"
+          <span class="font-semibold tracking-wider uppercase">
+            {{
+              !isGroupedExperience(experience)
+                ? formatDateRange(experience.startDate, experience.endDate)
+                : ""
+            }}
+          </span>
+          <span
+            v-if="!isGroupedExperience(experience) && experience.employmentType"
+            >•</span
           >
-            {{ achievement }}
+          <span
+            v-if="!isGroupedExperience(experience) && experience.employmentType"
+          >
+            {{ experience.employmentType }}
+          </span>
+        </div>
+
+        <!-- Company & Location -->
+        <div class="flex flex-col gap-1 mb-5 stagger-item">
+          <span class="text-text-primary text-lg font-semibold">{{
+            experience.company
+          }}</span>
+          <span class="text-text-secondary text-sm">{{
+            experience.location
+          }}</span>
+        </div>
+
+        <!-- Description -->
+        <ul class="list-none m-0 mb-6 p-0 stagger-item">
+          <li
+            v-for="(item, idx) in !isGroupedExperience(experience)
+              ? experience.description
+              : []"
+            :key="idx"
+            class="text-text-secondary text-[0.9375rem] leading-relaxed mb-2 pl-5 relative before:content-['•'] before:absolute before:left-0 before:text-text-subtle"
+          >
+            {{ item }}
           </li>
         </ul>
+
+        <!-- Technologies -->
+        <div class="flex flex-wrap gap-2 mb-4 stagger-item">
+          <span
+            v-for="tech in !isGroupedExperience(experience)
+              ? experience.technologies
+              : []"
+            :key="tech"
+            class="tech-tag px-3 py-1.5 bg-bg-primary border border-border-muted rounded-md text-[0.8125rem] text-text-secondary font-medium transition-all duration-200 hover:bg-bg-hover hover:border-border-strong hover:text-text-primary hover:-translate-y-0.5"
+          >
+            {{ tech }}
+          </span>
+        </div>
+
+        <!-- Achievements (if any) -->
+        <div
+          v-if="!isGroupedExperience(experience) && experience.achievements"
+          class="mt-4 pt-4 border-t border-border-muted stagger-item"
+        >
+          <div class="text-text-primary text-sm font-semibold mb-2">
+            Key Achievements:
+          </div>
+          <ul class="list-none m-0 p-0">
+            <li
+              v-for="(achievement, idx) in experience.achievements"
+              :key="idx"
+              class="text-text-secondary text-sm leading-relaxed mb-1 pl-4 relative before:content-['✓'] before:absolute before:left-0 before:text-success"
+            >
+              {{ achievement }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Multiple Roles (Merged Experience) -->
+      <div
+        v-if="hasMultipleRoles && isGroupedExperience(experience)"
+        class="space-y-6"
+      >
+        <div
+          v-for="(role, roleIdx) in experience.roles"
+          :key="roleIdx"
+          class="stagger-item"
+        >
+          <!-- Role Header -->
+          <div class="mb-4">
+            <h4 class="text-xl font-bold text-text-primary mb-1">
+              {{ role.role }}
+            </h4>
+            <div class="flex items-center gap-2 text-text-secondary text-sm">
+              <span class="font-semibold tracking-wider uppercase">
+                {{ formatDateRange(role.startDate, role.endDate) }}
+              </span>
+              <span v-if="role.employmentType">•</span>
+              <span v-if="role.employmentType">
+                {{ role.employmentType }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Role Description -->
+          <ul class="list-none m-0 mb-4 p-0">
+            <li
+              v-for="(item, idx) in role.description"
+              :key="idx"
+              class="text-text-secondary text-[0.9375rem] leading-relaxed mb-2 pl-5 relative before:content-['•'] before:absolute before:left-0 before:text-text-subtle"
+            >
+              {{ item }}
+            </li>
+          </ul>
+
+          <!-- Role Technologies -->
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span
+              v-for="tech in role.technologies"
+              :key="tech"
+              class="tech-tag px-3 py-1.5 bg-bg-primary border border-border-muted rounded-md text-[0.8125rem] text-text-secondary font-medium transition-all duration-200 hover:bg-bg-hover hover:border-border-strong hover:text-text-primary hover:-translate-y-0.5"
+            >
+              {{ tech }}
+            </span>
+          </div>
+
+          <!-- Role Achievements (if any) -->
+          <div
+            v-if="role.achievements"
+            class="mt-3 pt-3 border-t border-border-muted"
+          >
+            <ul class="list-none m-0 p-0">
+              <li
+                v-for="(achievement, idx) in role.achievements"
+                :key="idx"
+                class="text-text-secondary text-sm leading-relaxed mb-1 pl-4 relative before:content-['✓'] before:absolute before:left-0 before:text-success"
+              >
+                {{ achievement }}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- Project Links (if any) -->
@@ -111,17 +215,18 @@
     <div
       class="absolute top-4 right-4 px-3 py-1.5 bg-text-secondary/[0.08] border border-text-secondary/[0.15] rounded-md text-xs text-text-secondary font-semibold tracking-tight"
     >
-      {{ calculateDuration() }}
+      {{ hasMultipleRoles ? formatCompanyDuration() : calculateDuration() }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { Experience } from "@/data/experience";
+import type { DisplayExperience } from "@/utils/experience";
+import { isGroupedExperience } from "@/utils/experience";
 
 interface Props {
-  experience: Experience;
+  experience: DisplayExperience;
   index: number;
   isActive?: boolean;
 }
@@ -131,43 +236,45 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const isLeft = computed(() => props.index % 2 === 0);
+const hasMultipleRoles = computed(() => isGroupedExperience(props.experience));
 
-const formatDateRange = () => {
-  const formatDate = (dateStr: string) => {
-    const [year, month] = dateStr.split("-");
-    const monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    return `${monthNames[parseInt(month) - 1]} ${year}`;
-  };
+const formatDate = (dateStr: string) => {
+  const [year, month] = dateStr.split("-");
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  return `${monthNames[parseInt(month) - 1]} ${year}`;
+};
 
-  const start = formatDate(props.experience.startDate);
-  const end = props.experience.endDate
-    ? formatDate(props.experience.endDate)
-    : "Present";
-
+const formatDateRange = (
+  startDate: string,
+  endDate: string | null | undefined,
+) => {
+  const start = formatDate(startDate);
+  const end = endDate ? formatDate(endDate) : "Present";
   return `${start} - ${end}`;
 };
 
-const calculateDuration = () => {
-  const [startYear, startMonth] = props.experience.startDate
-    .split("-")
-    .map(Number);
+const calculateDurationBetween = (
+  startDate: string,
+  endDate: string | null | undefined,
+) => {
+  const [startYear, startMonth] = startDate.split("-").map(Number);
 
   let endYear, endMonth;
-  if (props.experience.endDate) {
-    [endYear, endMonth] = props.experience.endDate.split("-").map(Number);
+  if (endDate) {
+    [endYear, endMonth] = endDate.split("-").map(Number);
   } else {
     // Use current date for "Present"
     const now = new Date();
@@ -192,6 +299,46 @@ const calculateDuration = () => {
   }
 
   return parts.join(" ") || "1 mo";
+};
+
+const calculateDuration = () => {
+  if (isGroupedExperience(props.experience)) {
+    return formatCompanyDuration();
+  }
+  return calculateDurationBetween(
+    props.experience.startDate,
+    props.experience.endDate,
+  );
+};
+
+const calculateDurationForRole = (
+  startDate: string,
+  endDate: string | null | undefined,
+) => {
+  return calculateDurationBetween(startDate, endDate);
+};
+
+const formatCompanyDuration = () => {
+  if (!isGroupedExperience(props.experience)) {
+    return calculateDuration();
+  }
+
+  // Find the earliest start date and latest end date across all roles
+  const roles = props.experience.roles;
+  const startDates = roles.map((r) => r.startDate);
+  const endDates = roles.map((r) => r.endDate);
+
+  const earliestStart = startDates.reduce((earliest, current) => {
+    return current < earliest ? current : earliest;
+  });
+
+  const latestEnd = endDates.reduce((latest: string | null, current) => {
+    if (current === null) return null; // If any role is current, company is current
+    if (latest === null) return current;
+    return current > latest ? current : latest;
+  }, endDates[0]);
+
+  return calculateDurationBetween(earliestStart, latestEnd);
 };
 
 // Use RAF for smooth tilt animation

@@ -20,6 +20,7 @@ const experiences = defineCollection({
       )
       .optional(),
     achievements: z.array(z.string()).optional(),
+    employmentType: z.string().optional(),
     order: z.number(),
   }),
 });

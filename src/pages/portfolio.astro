@@ -2,15 +2,22 @@
 import Layout from "@/layouts/Layout.astro";
 import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
 import { getCollection } from "astro:content";
+import type { Experience } from "@/data/experience";
+import { groupExperiencesByCompany } from "@/utils/experience";
 
 const experienceEntries = await getCollection("experiences");
-const experiences = experienceEntries
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((entry) => ({
+
+// Convert entries to Experience objects
+const allExperiences: Experience[] = experienceEntries
+  .sort((a: any, b: any) => a.data.order - b.data.order)
+  .map((entry: any) => ({
     id: entry.id,
     ...entry.data,
-    description: entry.body.trim().split('\n\n'),
+    description: entry.body.trim().split('\n\n').filter((line: string) => line.trim()),
   }));
+
+// Group experiences by company
+const experiences = groupExperiencesByCompany(allExperiences);
 ---
 
 <Layout
