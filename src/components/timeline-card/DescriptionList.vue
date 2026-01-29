@@ -3,7 +3,7 @@
     <li
       v-for="(item, idx) in items"
       :key="idx"
-      class="text-text-secondary text-[0.9375rem] leading-relaxed mb-2 pl-5 relative before:content-['•'] before:absolute before:left-0 before:text-text-subtle"
+      class="text-text-secondary text-sm sm:text-[0.9375rem] leading-relaxed mb-2 pl-5 relative before:content-['•'] before:absolute before:left-0 before:text-text-subtle"
     >
       {{ item }}
     </li>

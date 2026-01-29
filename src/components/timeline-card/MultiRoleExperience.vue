@@ -15,10 +15,12 @@
       >
         <!-- Role Header -->
         <div class="mb-4">
-          <h4 class="text-xl font-bold text-text-primary mb-1">
+          <h4 class="text-lg sm:text-xl font-bold text-text-primary mb-1">
             {{ role.role }}
           </h4>
-          <div class="flex items-center gap-2 text-text-secondary text-sm">
+          <div
+            class="flex items-center gap-2 text-text-secondary text-xs sm:text-sm"
+          >
             <span class="font-semibold tracking-wider uppercase">
               {{ formatDateRange(role.startDate, role.endDate) }}
             </span>

@@ -9,10 +9,12 @@
 
     <!-- Company & Location -->
     <div class="flex flex-col gap-1 mb-5 stagger-item">
-      <span class="text-text-primary text-lg font-semibold">{{
+      <span class="text-text-primary text-base sm:text-lg font-semibold">{{
         experience.company
       }}</span>
-      <span class="text-text-secondary text-sm">{{ experience.location }}</span>
+      <span class="text-text-secondary text-xs sm:text-sm">{{
+        experience.location
+      }}</span>
     </div>
 
     <!-- Description -->

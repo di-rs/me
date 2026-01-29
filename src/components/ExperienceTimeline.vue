@@ -2,7 +2,7 @@
   <div class="relative" ref="containerRef">
     <!-- Subtle Timeline Line -->
     <div
-      class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 scale-y-0 origin-top z-0 pointer-events-none will-change-transform bg-gradient-to-b from-text-secondary/15 via-text-secondary/10 to-text-secondary/5"
+      class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 scale-y-0 origin-top z-0 pointer-events-none will-change-transform bg-gradient-to-b from-text-secondary/15 via-text-secondary/10 to-text-secondary/5 hidden lg:block"
       ref="timelineLineRef"
     ></div>
 
@@ -16,7 +16,7 @@
     >
       <!-- Timeline Marker -->
       <div
-        class="timeline-marker relative w-6 h-6 z-2 flex items-center justify-center opacity-0"
+        class="timeline-marker relative w-6 h-6 z-2 items-center justify-center opacity-0 hidden lg:flex"
       >
         <div
           class="marker-inner w-4 h-4 rounded-full bg-white/20 border-[3px] border-white/70 relative z-[2] transition-all duration-300"
@@ -256,27 +256,21 @@ const initTimelineAnimations = () => {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .timeline-item {
-    grid-template-columns: auto 1fr !important;
-    grid-template-areas: "marker card" !important;
-    gap: 1.5rem !important;
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "card" !important;
+    gap: 0 !important;
   }
 
   .item-left,
   .item-right {
-    grid-template-areas: "marker card" !important;
-  }
-
-  .timeline-marker {
-    align-self: start;
-    margin-top: 2rem;
+    grid-template-areas: "card" !important;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .timeline-item {
-    gap: 1rem !important;
     margin-bottom: 2.5rem !important;
   }
 }
