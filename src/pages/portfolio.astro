@@ -1,0 +1,27 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
+---
+
+<Layout
+  title="Dima Portfolio | Professional Experience"
+  description="Explore my professional journey, work experience, and achievements in software engineering and web development."
+>
+  <section class="portfolio-section">
+    <ExperienceTimeline client:only="vue" />
+  </section>
+</Layout>
+
+<style>
+  .portfolio-section {
+    min-height: 100vh;
+    padding: 0 1rem;
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-section {
+      padding: 0 0.5rem;
+    }
+  }
+</style>

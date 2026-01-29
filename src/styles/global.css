@@ -210,6 +210,10 @@
   --color-text-muted: #525252;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   height: 100vh;
   min-height: 100dvh;
