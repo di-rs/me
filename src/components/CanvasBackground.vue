@@ -21,14 +21,37 @@ interface Particle {
 
 const container = ref<HTMLDivElement | null>(null);
 
+// Helper to get color from CSS variable
+const getColorFromVar = (varName: string): [number, number, number] => {
+  const hex = getComputedStyle(document.documentElement)
+    .getPropertyValue(varName)
+    .trim();
+
+  // Convert hex to RGB
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+      ]
+    : [163, 163, 163]; // fallback to text-secondary
+};
+
 onMounted(() => {
   if (!container.value) return;
 
   const sketch = (p: p5) => {
     let particles: Particle[] = [];
+    let particleColor: [number, number, number];
+    let lineColor: [number, number, number];
 
     p.setup = () => {
       p.createCanvas(p.windowWidth, p.windowHeight);
+
+      // Get colors from CSS variables
+      particleColor = getColorFromVar("--color-text-secondary");
+      lineColor = getColorFromVar("--color-text-secondary");
 
       // Create minimal particles
       for (let i = 0; i < 30; i++) {
@@ -54,9 +77,9 @@ onMounted(() => {
         if (particle.x < 0 || particle.x > p.width) particle.vx *= -1;
         if (particle.y < 0 || particle.y > p.height) particle.vy *= -1;
 
-        // Draw particle
+        // Draw particle using CSS variable color
         p.noStroke();
-        p.fill(163, 163, 163, 65);
+        p.fill(particleColor[0], particleColor[1], particleColor[2], 65);
         p.circle(particle.x, particle.y, particle.size);
 
         // Draw connections
@@ -65,7 +88,7 @@ onMounted(() => {
 
           if (distance < 150) {
             const alpha = p.map(distance, 0, 150, 40, 0);
-            p.stroke(163, 163, 163, alpha);
+            p.stroke(lineColor[0], lineColor[1], lineColor[2], alpha);
             p.strokeWeight(0.5);
             p.line(particle.x, particle.y, other.x, other.y);
           }

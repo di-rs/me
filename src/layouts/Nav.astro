@@ -1,39 +1,44 @@
 ---
-import MetallicBorder from "../components/MetallicBorder.vue";
+
 ---
 
-<nav class="py-6 border-b border-border-subtle backdrop-blur-sm relative z-10">
-  <MetallicBorder client:only="vue" position="bottom" />
-  <ul
-    class="px-6 md:px-24 max-w-7xl mx-auto list-none items-center flex gap-8 md:gap-12"
+<div class="px-3 md:px-6 py-6 relative z-10">
+  <nav
+    class="max-w-6xl mx-auto relative rounded-3xl border border-border-muted bg-bg-primary/60 backdrop-blur-[32px] backdrop-saturate-[180%] shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.08)] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-border-subtle/60 before:to-transparent before:pointer-events-none"
   >
-    <li class="mr-auto">
-      <a
-        href="/"
-        class="flex items-center gap-2 text-text-primary hover:opacity-80 transition-opacity"
-      >
-        <img
-          src="/favicon.svg"
-          width={32}
-          height={32}
-          alt="Logo"
-          class="opacity-90"
-        />
-      </a>
-    </li>
+    <ul class="px-6 md:px-8 py-4 list-none items-center flex gap-6 md:gap-8">
+      <li class="mr-auto">
+        <a
+          href="/"
+          class="flex items-center gap-2 text-text-primary hover:opacity-80 transition-opacity"
+        >
+          <img
+            src="/favicon.svg"
+            width={28}
+            height={28}
+            alt="Logo"
+            class="opacity-90"
+          />
+        </a>
+      </li>
 
-    <li>
-      <a class="text-sm text-text-muted cursor-not-allowed">Portfolio</a>
-    </li>
+      <li>
+        <a
+          href="/portfolio"
+          class="text-sm text-text-secondary hover:text-text-primary transition-colors"
+          >Portfolio</a
+        >
+      </li>
 
-    <li>
-      <span class="text-sm text-text-muted cursor-not-allowed"
-        >Chat w/ Dima</span
-      >
-    </li>
+      <li>
+        <span class="text-sm text-text-muted cursor-not-allowed"
+          >Chat w/ Dima</span
+        >
+      </li>
 
-    <!-- <li>
-      <a class="text-sm text-text-secondary hover:text-text-primary transition-colors" href="http://code.dimaportish.com">Beauty Of Code</a>
-    </li> -->
-  </ul>
-</nav>
+      <!-- <li>
+        <a class="text-sm text-text-secondary hover:text-text-primary transition-colors" href="http://code.dimaportish.com">Beauty Of Code</a>
+      </li> -->
+    </ul>
+  </nav>
+</div>

@@ -18,29 +18,13 @@
     <!-- Glow effect on hover -->
     <div
       v-if="variant === 'primary'"
-      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"
-      style="
-        background: radial-gradient(
-          circle at center,
-          rgba(229, 229, 229, 0.3),
-          transparent 70%
-        );
-      "
+      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-[radial-gradient(circle_at_center,var(--color-text-primary)/30,transparent_70%)]"
     />
 
     <!-- Border shimmer for secondary -->
     <div
       v-if="variant === 'secondary'"
-      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-      style="
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(163, 163, 163, 0.15),
-          transparent
-        );
-        animation: shimmer-slide 3s ease-in-out infinite;
-      "
+      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-r from-transparent via-text-secondary/15 to-transparent animate-[shimmer-slide_3s_ease-in-out_infinite]"
     />
 
     <span class="relative z-10 flex items-center gap-2">
