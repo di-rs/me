@@ -1,81 +1,116 @@
 <template>
   <div
-    class="timeline-card group"
+    class="timeline-card relative bg-bg-tertiary border border-border-muted rounded-[20px] p-10 md:p-8 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] [transform-style:preserve-3d] origin-center will-change-transform shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:bg-bg-subtle hover:border-border-strong hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] group"
     :class="{
       'card-left': isLeft,
       'card-right': !isLeft,
-      'card-active': isActive,
+      'card-active bg-bg-subtle border-border-strong/75 shadow-[0_30px_60px_rgba(0,0,0,0.8)]':
+        isActive,
     }"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousemove="handleMouseMove"
   >
     <!-- Card Content -->
-    <div class="card-content">
+    <div class="relative z-[1]">
       <!-- Company Logo (if provided) -->
-      <div v-if="experience.companyLogo" class="company-logo stagger-item">
-        <img :src="experience.companyLogo" :alt="experience.company" />
+      <div
+        v-if="experience.companyLogo"
+        class="w-16 h-16 mb-4 rounded-xl overflow-hidden bg-bg-primary flex items-center justify-center stagger-item"
+      >
+        <img
+          :src="experience.companyLogo"
+          :alt="experience.company"
+          class="w-full h-full object-contain grayscale-[30%] brightness-90 transition-[filter] duration-300 group-hover:grayscale-0 group-hover:brightness-100"
+        />
       </div>
 
       <!-- Date Range -->
-      <div class="date-range stagger-item">
-        <span class="date-text">{{ formatDateRange() }}</span>
+      <div class="mb-3 stagger-item">
+        <span
+          class="text-text-secondary text-sm font-semibold tracking-wider uppercase"
+          >{{ formatDateRange() }}</span
+        >
       </div>
 
       <!-- Role & Company -->
-      <h3 class="role-title stagger-item">
+      <h3
+        class="text-2xl md:text-xl font-bold text-text-primary mb-2 leading-tight stagger-item"
+      >
         {{ experience.role }}
       </h3>
-      <div class="company-info stagger-item">
-        <span class="company-name">{{ experience.company }}</span>
-        <span class="location">{{ experience.location }}</span>
+      <div class="flex flex-col gap-1 mb-5 stagger-item">
+        <span class="text-text-primary text-lg font-semibold">{{
+          experience.company
+        }}</span>
+        <span class="text-text-secondary text-sm">{{
+          experience.location
+        }}</span>
       </div>
 
       <!-- Description -->
-      <ul class="description stagger-item">
-        <li v-for="(item, idx) in experience.description" :key="idx">
+      <ul class="list-none m-0 mb-6 p-0 stagger-item">
+        <li
+          v-for="(item, idx) in experience.description"
+          :key="idx"
+          class="text-text-secondary text-[0.9375rem] leading-relaxed mb-2 pl-5 relative before:content-['•'] before:absolute before:left-0 before:text-text-subtle"
+        >
           {{ item }}
         </li>
       </ul>
 
       <!-- Technologies -->
-      <div class="technologies stagger-item">
+      <div class="flex flex-wrap gap-2 mb-4 stagger-item">
         <span
           v-for="tech in experience.technologies"
           :key="tech"
-          class="tech-tag"
+          class="tech-tag px-3 py-1.5 bg-bg-primary border border-border-muted rounded-md text-[0.8125rem] text-text-secondary font-medium transition-all duration-200 hover:bg-bg-hover hover:border-border-strong hover:text-text-primary hover:-translate-y-0.5"
         >
           {{ tech }}
         </span>
       </div>
 
       <!-- Achievements (if any) -->
-      <div v-if="experience.achievements" class="achievements stagger-item">
-        <div class="achievement-label">Key Achievements:</div>
-        <ul>
-          <li v-for="(achievement, idx) in experience.achievements" :key="idx">
+      <div
+        v-if="experience.achievements"
+        class="mt-4 pt-4 border-t border-border-muted stagger-item"
+      >
+        <div class="text-text-primary text-sm font-semibold mb-2">
+          Key Achievements:
+        </div>
+        <ul class="list-none m-0 p-0">
+          <li
+            v-for="(achievement, idx) in experience.achievements"
+            :key="idx"
+            class="text-text-secondary text-sm leading-relaxed mb-1 pl-4 relative before:content-['✓'] before:absolute before:left-0 before:text-success"
+          >
             {{ achievement }}
           </li>
         </ul>
       </div>
 
       <!-- Project Links (if any) -->
-      <div v-if="experience.projectUrls" class="project-links stagger-item">
+      <div
+        v-if="experience.projectUrls"
+        class="flex flex-wrap gap-4 mt-4 stagger-item"
+      >
         <a
           v-for="project in experience.projectUrls"
           :key="project.url"
           :href="project.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="project-link"
+          class="text-text-primary text-sm font-medium no-underline transition-colors duration-200 hover:text-text-secondary"
         >
           {{ project.name }} →
         </a>
       </div>
     </div>
 
-    <!-- Duration Badge (replacing type badge) -->
-    <div class="duration-badge-absolute">
+    <!-- Duration Badge (absolute position at top right) -->
+    <div
+      class="absolute top-4 right-4 px-3 py-1.5 bg-text-secondary/[0.08] border border-text-secondary/[0.15] rounded-md text-xs text-text-secondary font-semibold tracking-tight"
+    >
       {{ calculateDuration() }}
     </div>
   </div>
@@ -210,242 +245,13 @@ const handleMouseMove = (e: MouseEvent) => {
 </script>
 
 <style scoped>
+/* GSAP needs to find .timeline-card class for animations */
 .timeline-card {
-  position: relative;
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 2.5rem;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-style: preserve-3d;
-  transform-origin: center center;
-  will-change: transform;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  /* All visual styles are in Tailwind classes above */
 }
 
-.timeline-card:hover {
-  background: #222;
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-}
-
-.timeline-card.card-active {
-  background: #222;
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
-}
-
-.card-content {
-  position: relative;
-  z-index: 1;
-}
-
-/* Company Logo */
-.company-logo {
-  width: 64px;
-  height: 64px;
-  margin-bottom: 1rem;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #0a0a0a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.company-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: grayscale(30%) brightness(0.9);
-  transition: filter 0.3s ease;
-}
-
-.timeline-card:hover .company-logo img {
-  filter: grayscale(0%) brightness(1);
-}
-
-/* Date Range */
-.date-range {
-  margin-bottom: 0.75rem;
-}
-
-.date-text {
-  color: var(--color-text-secondary, #a3a3a3);
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.date-text {
-  color: #a3a3a3;
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-/* Role Title */
-.role-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #e5e5e5;
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
-}
-
-/* Company Info */
-.company-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  margin-bottom: 1.25rem;
-}
-
-.company-name {
-  color: #e5e5e5;
-  font-size: 1.125rem;
-  font-weight: 600;
-}
-
-.location {
-  color: #a3a3a3;
-  font-size: 0.875rem;
-}
-
-/* Description */
-.description {
-  list-style: none;
-  margin: 0 0 1.5rem 0;
-  padding: 0;
-}
-
-.description li {
-  color: #a3a3a3;
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
-  padding-left: 1.25rem;
-  position: relative;
-}
-
-.description li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #666666;
-}
-
-/* Technologies */
-.technologies {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
+/* Tech tags class for GSAP */
 .tech-tag {
-  padding: 0.375rem 0.75rem;
-  background: #0a0a0a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  font-size: 0.8125rem;
-  color: #a3a3a3;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.tech-tag:hover {
-  background: #2a2a2a;
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #e5e5e5;
-  transform: translateY(-2px);
-}
-
-/* Achievements */
-.achievements {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.achievement-label {
-  color: #e5e5e5;
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.achievements ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.achievements li {
-  color: #a3a3a3;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 0.25rem;
-  padding-left: 1rem;
-  position: relative;
-}
-
-.achievements li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: #4ade80;
-}
-
-/* Project Links */
-.project-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.project-link {
-  color: #e5e5e5;
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.project-link:hover {
-  color: #a3a3a3;
-}
-
-/* Duration Badge (absolute position at top right) */
-.duration-badge-absolute {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.375rem 0.75rem;
-  background: rgba(163, 163, 163, 0.08);
-  border: 1px solid rgba(163, 163, 163, 0.15);
-  border-radius: 6px;
-  font-size: 0.75rem;
-  color: var(--color-text-secondary, #a3a3a3);
-  font-weight: 600;
-  letter-spacing: 0.03em;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .timeline-card {
-    padding: 1.5rem;
-  }
-
-  .role-title {
-    font-size: 1.25rem;
-  }
-
-  .company-name {
-    font-size: 1rem;
-  }
+  /* All visual styles are in Tailwind classes above */
 }
 </style>

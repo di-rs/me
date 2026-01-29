@@ -1,34 +1,35 @@
 <template>
-  <div class="timeline-wrapper" ref="wrapperRef">
-    <!-- Section Header -->
-    <div class="timeline-header">
-      <h2 class="timeline-title">Experience</h2>
-      <p class="timeline-subtitle">My professional journey</p>
-    </div>
+  <div class="relative" ref="containerRef">
+    <!-- Subtle Timeline Line -->
+    <div
+      class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 scale-y-0 origin-top z-0 pointer-events-none will-change-transform bg-gradient-to-b from-text-secondary/15 via-text-secondary/10 to-text-secondary/5"
+      ref="timelineLineRef"
+    ></div>
 
-    <!-- Timeline Container -->
-    <div class="timeline-container" ref="containerRef">
-      <!-- Subtle Timeline Line -->
-      <div class="timeline-line" ref="timelineLineRef"></div>
-
-      <!-- Timeline Items -->
+    <!-- Timeline Items -->
+    <div
+      v-for="(exp, index) in experiences"
+      :key="exp.id"
+      class="timeline-item relative grid grid-cols-[1fr_auto_1fr] gap-8 mb-16 items-center last:mb-0"
+      :class="{ 'item-left': index % 2 === 0, 'item-right': index % 2 !== 0 }"
+      :data-index="index"
+    >
+      <!-- Timeline Marker -->
       <div
-        v-for="(exp, index) in experiences"
-        :key="exp.id"
-        class="timeline-item"
-        :class="{ 'item-left': index % 2 === 0, 'item-right': index % 2 !== 0 }"
-        :data-index="index"
+        class="timeline-marker relative w-6 h-6 z-2 flex items-center justify-center opacity-0"
+        :class="`marker-${exp.type}`"
       >
-        <!-- Timeline Marker -->
-        <div class="timeline-marker" :class="`marker-${exp.type}`">
-          <div class="marker-inner"></div>
-          <div class="marker-ring"></div>
-        </div>
+        <div
+          class="marker-inner w-4 h-4 rounded-full bg-white/20 border-[3px] border-white/70 relative z-[2] transition-all duration-300"
+        ></div>
+        <div
+          class="marker-ring absolute w-full h-full rounded-full border-2 border-white/50 opacity-50 z-[1]"
+        ></div>
+      </div>
 
-        <!-- Timeline Card -->
-        <div class="timeline-card-wrapper">
-          <TimelineCard :experience="exp" :index="index" />
-        </div>
+      <!-- Timeline Card -->
+      <div class="timeline-card-wrapper relative z-[1] min-h-[200px] opacity-0">
+        <TimelineCard :experience="exp" :index="index" />
       </div>
     </div>
   </div>
@@ -43,7 +44,6 @@ import { experiences } from "@/data/experience";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const wrapperRef = ref<HTMLElement | null>(null);
 const containerRef = ref<HTMLElement | null>(null);
 const timelineLineRef = ref<HTMLElement | null>(null);
 
@@ -63,34 +63,6 @@ onMounted(() => {
 onUnmounted(() => {
   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 });
-
-const calculateTimelinePath = () => {
-  if (!containerRef.value || !svgRef.value || !pathRef.value) return;
-
-  const container = containerRef.value;
-  const items = container.querySelectorAll(".timeline-item");
-
-  if (items.length === 0) return;
-
-  // Calculate SVG dimensions based on container
-  const svgWidth = containerRef.value.offsetWidth;
-  const svgHeight = containerRef.value.offsetHeight;
-
-  // Set SVG dimensions
-  svgRef.value.setAttribute("width", svgWidth.toString());
-  svgRef.value.setAttribute("height", svgHeight.toString());
-
-  // Create a simple straight vertical line in the center
-  const centerX = svgWidth / 2;
-  const pathData = `M ${centerX} 0 L ${centerX} ${svgHeight}`;
-
-  pathRef.value.setAttribute("d", pathData);
-
-  // Calculate path length for animation
-  const pathLength = pathRef.value.getTotalLength();
-  pathRef.value.style.strokeDasharray = pathLength.toString();
-  pathRef.value.style.strokeDashoffset = pathLength.toString();
-};
 
 const initTimelineAnimations = () => {
   if (!containerRef.value) return;
@@ -119,14 +91,6 @@ const initTimelineAnimations = () => {
       },
     });
   }
-
-  // 2. Animate Header
-  gsap.from(".timeline-header", {
-    opacity: 0,
-    y: 30,
-    duration: 1,
-    ease: "power2.out",
-  });
 
   // 2. Animate Timeline Markers
   gsap.utils.toArray(".timeline-marker").forEach((marker: any) => {
@@ -269,74 +233,7 @@ const initTimelineAnimations = () => {
 </script>
 
 <style scoped>
-.timeline-wrapper {
-  position: relative;
-  width: 100%;
-  padding: 0;
-  background: #0a0a0a;
-  min-height: 100vh;
-}
-
-/* Header */
-.timeline-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  padding: 1rem 2rem 0;
-}
-
-.timeline-title {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--color-text-primary, #e5e5e5);
-  margin-bottom: 0.25rem;
-  letter-spacing: -0.02em;
-}
-
-.timeline-subtitle {
-  font-size: 0.9375rem;
-  color: var(--color-text-secondary, #a3a3a3);
-  font-weight: 400;
-}
-
-/* Timeline Container */
-.timeline-container {
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  min-height: 100vh; /* Ensure container has height */
-}
-
-/* Subtle Timeline Line */
-.timeline-line {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(
-    to bottom,
-    rgba(163, 163, 163, 0.15) 0%,
-    rgba(163, 163, 163, 0.1) 50%,
-    rgba(163, 163, 163, 0.05) 100%
-  );
-  transform: translateX(-50%) scaleY(0);
-  transform-origin: top center;
-  z-index: 0;
-  pointer-events: none;
-  will-change: transform;
-}
-
-/* Timeline Item */
-.timeline-item {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 2rem;
-  margin-bottom: 4rem;
-  align-items: center;
-}
-
+/* Only keeping grid-template-areas which is not easily done in Tailwind */
 .item-left {
   grid-template-areas: "card marker empty";
 }
@@ -345,112 +242,37 @@ const initTimelineAnimations = () => {
   grid-template-areas: "empty marker card";
 }
 
-.timeline-item:last-child {
-  margin-bottom: 0;
-}
-
-/* Timeline Marker */
 .timeline-marker {
   grid-area: marker;
-  position: relative;
-  width: 24px;
-  height: 24px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  /* Initial hidden state - GSAP will reveal */
 }
 
-.marker-inner {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-bg-primary, #0a0a0a);
-  border: 3px solid var(--color-text-secondary, #a3a3a3);
-  position: relative;
-  z-index: 2;
-  transition: all 0.3s ease;
-}
-
-.marker-ring {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 2px solid var(--color-text-secondary, #a3a3a3);
-  opacity: 0.5;
-  z-index: 1;
-}
-
-/* All markers use same whitish color */
-.timeline-marker .marker-inner {
-  border-color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.timeline-marker .marker-ring {
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* Card Wrapper */
 .timeline-card-wrapper {
   grid-area: card;
-  position: relative;
-  z-index: 1;
-  min-height: 200px;
-  opacity: 0;
-  /* Initial hidden state - GSAP will reveal */
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .timeline-header {
-    margin-bottom: 3rem;
-  }
-
-  .timeline-title {
-    font-size: 2rem;
-  }
-
-  .timeline-subtitle {
-    font-size: 1rem;
-  }
-
   .timeline-item {
-    grid-template-columns: auto 1fr;
-    grid-template-areas: "marker card";
-    gap: 1.5rem;
+    grid-template-columns: auto 1fr !important;
+    grid-template-areas: "marker card" !important;
+    gap: 1.5rem !important;
   }
 
   .item-left,
   .item-right {
-    grid-template-areas: "marker card";
+    grid-template-areas: "marker card" !important;
   }
 
   .timeline-marker {
     align-self: start;
     margin-top: 2rem;
   }
-
-  .timeline-svg {
-    left: 12px;
-  }
-
-  .timeline-path {
-    stroke-width: 2;
-  }
 }
 
 @media (max-width: 480px) {
-  .timeline-container {
-    padding: 1rem 0.5rem;
-  }
-
   .timeline-item {
-    gap: 1rem;
-    margin-bottom: 2.5rem;
+    gap: 1rem !important;
+    margin-bottom: 2.5rem !important;
   }
 }
 </style>

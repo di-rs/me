@@ -4,16 +4,8 @@
     class="absolute left-0 right-0 h-px pointer-events-none"
   >
     <div
-      class="absolute inset-0 animate-shimmer"
+      class="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-text-secondary/10 via-gray-300/30 via-text-secondary/10 to-transparent bg-[length:200%_100%]"
       :style="{
-        background: `linear-gradient(90deg,
-          transparent 0%,
-          rgba(163, 163, 163, 0.1) 20%,
-          rgba(212, 212, 212, 0.3) 40%,
-          rgba(163, 163, 163, 0.1) 60%,
-          transparent 80%
-        )`,
-        backgroundSize: '200% 100%',
         animationDelay: `${delay}s`,
       }"
     />

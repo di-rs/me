@@ -29,6 +29,15 @@ let particles: THREE.Points;
 let gridHelper: THREE.GridHelper;
 let animationId: number;
 
+// Helper to get hex color from CSS variable and convert to THREE color
+const getThreeColorFromVar = (varName: string): number => {
+  const hex = getComputedStyle(document.documentElement)
+    .getPropertyValue(varName)
+    .trim()
+    .replace("#", "");
+  return parseInt(hex, 16);
+};
+
 onMounted(() => {
   if (!container.value) return;
 
@@ -37,6 +46,13 @@ onMounted(() => {
     container.value.clientHeight,
     window.innerHeight * 0.8,
   );
+
+  // Get colors from CSS variables
+  const bgPrimaryColor = getThreeColorFromVar("--color-bg-primary");
+  const textSubtleColor = getThreeColorFromVar("--color-text-subtle");
+  const textMutedColor = getThreeColorFromVar("--color-text-muted");
+  const gray700Color = getThreeColorFromVar("--color-gray-700");
+  const gray800Color = getThreeColorFromVar("--color-gray-800");
 
   // Scene setup
   scene = new THREE.Scene();
@@ -53,10 +69,10 @@ onMounted(() => {
   renderer.setClearColor(0x000000, 0);
   container.value.appendChild(renderer.domElement);
 
-  // Main sphere matching background color #0a0a0a
+  // Main sphere using CSS variable color
   const sphereGeometry = new THREE.SphereGeometry(12, 32, 32);
   const sphereMaterial = new THREE.MeshPhongMaterial({
-    color: 0x0a0a0a,
+    color: bgPrimaryColor,
     emissive: 0x000000,
     shininess: 10,
     transparent: false,
@@ -66,10 +82,10 @@ onMounted(() => {
   sphere.position.y = -8; // Move way down so it extends below footer
   scene.add(sphere);
 
-  // Wireframe grid on sphere
+  // Wireframe grid on sphere using CSS variable color
   const wireframeGeometry = new THREE.SphereGeometry(12.1, 28, 28);
   const wireframeMaterial = new THREE.LineBasicMaterial({
-    color: 0x505055,
+    color: textSubtleColor,
     transparent: true,
     opacity: 0.4,
   });
@@ -100,7 +116,7 @@ onMounted(() => {
   );
 
   const particlesMaterial = new THREE.PointsMaterial({
-    color: 0x909098,
+    color: textMutedColor,
     size: 0.1,
     transparent: true,
     opacity: 0.5,
@@ -109,22 +125,22 @@ onMounted(() => {
   particles = new THREE.Points(particlesGeometry, particlesMaterial);
   scene.add(particles);
 
-  // Grid floor - massive and much lower
-  gridHelper = new THREE.GridHelper(40, 50, 0x505058, 0x303038);
+  // Grid floor using CSS variable colors
+  gridHelper = new THREE.GridHelper(40, 50, textSubtleColor, gray800Color);
   gridHelper.position.y = -20;
   gridHelper.material.transparent = true;
   gridHelper.material.opacity = 0.2;
   scene.add(gridHelper);
 
-  // Lighting - very dark
-  const ambientLight = new THREE.AmbientLight(0x404048, 0.3);
+  // Lighting using CSS variable colors
+  const ambientLight = new THREE.AmbientLight(gray700Color, 0.3);
   scene.add(ambientLight);
 
-  const pointLight = new THREE.PointLight(0x606068, 0.6, 100);
+  const pointLight = new THREE.PointLight(textSubtleColor, 0.6, 100);
   pointLight.position.set(5, 5, 5);
   scene.add(pointLight);
 
-  const backLight = new THREE.PointLight(0x404048, 0.3, 100);
+  const backLight = new THREE.PointLight(gray700Color, 0.3, 100);
   backLight.position.set(-5, 2, -5);
   scene.add(backLight);
 

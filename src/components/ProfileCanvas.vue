@@ -27,6 +27,23 @@ interface WaveRing {
 const container = ref<HTMLDivElement | null>(null);
 let waveP5Instance: p5 | null = null;
 
+// Helper to get color from CSS variable
+const getColorFromVar = (varName: string): [number, number, number] => {
+  const hex = getComputedStyle(document.documentElement)
+    .getPropertyValue(varName)
+    .trim();
+
+  // Convert hex to RGB
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+      ]
+    : [163, 163, 163]; // fallback
+};
+
 const triggerWave = () => {
   if (!container.value) return;
 
@@ -48,9 +65,11 @@ const triggerWave = () => {
   const sketch = (p: p5) => {
     let waveRings: WaveRing[] = [];
     let isComplete = false;
+    let waveColor: [number, number, number];
 
     p.setup = () => {
       p.createCanvas(p.windowWidth, p.windowHeight);
+      waveColor = getColorFromVar("--color-text-secondary");
 
       // Create initial wave ring
       waveRings.push({
@@ -75,7 +94,7 @@ const triggerWave = () => {
           }
         } else {
           p.noFill();
-          p.stroke(163, 163, 163, ring.alpha);
+          p.stroke(waveColor[0], waveColor[1], waveColor[2], ring.alpha);
           p.strokeWeight(2);
           p.circle(centerX, centerY, ring.radius);
         }
@@ -99,9 +118,17 @@ onMounted(() => {
     let particles: Particle[] = [];
     const centerRadius = 80;
     const canvasSize = 300;
+    let centerColor: [number, number, number];
+    let particleColor: [number, number, number];
+    let lineColor: [number, number, number];
 
     p.setup = () => {
       p.createCanvas(canvasSize, canvasSize);
+
+      // Get colors from CSS variables
+      centerColor = getColorFromVar("--color-text-primary");
+      particleColor = getColorFromVar("--color-text-secondary");
+      lineColor = getColorFromVar("--color-text-secondary");
 
       // Create particles orbiting around center
       for (let i = 0; i < 40; i++) {
@@ -117,14 +144,14 @@ onMounted(() => {
     p.draw = () => {
       p.clear();
 
-      // Draw center circle
+      // Draw center circle using CSS variable color
       p.noStroke();
-      p.fill(229, 229, 229, 200);
+      p.fill(centerColor[0], centerColor[1], centerColor[2], 200);
       p.circle(canvasSize / 2, canvasSize / 2, centerRadius * 2);
 
       // Draw subtle ring around center
       p.noFill();
-      p.stroke(163, 163, 163, 50);
+      p.stroke(particleColor[0], particleColor[1], particleColor[2], 50);
       p.strokeWeight(1);
       p.circle(canvasSize / 2, canvasSize / 2, centerRadius * 2 + 10);
 
@@ -137,11 +164,11 @@ onMounted(() => {
 
         // Draw particle
         p.noStroke();
-        p.fill(163, 163, 163, 80);
+        p.fill(particleColor[0], particleColor[1], particleColor[2], 80);
         p.circle(x, y, particle.size);
 
         // Draw line to center
-        p.stroke(163, 163, 163, 20);
+        p.stroke(lineColor[0], lineColor[1], lineColor[2], 20);
         p.strokeWeight(0.5);
         p.line(canvasSize / 2, canvasSize / 2, x, y);
       });
