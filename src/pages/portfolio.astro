@@ -1,6 +1,16 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
+import { getCollection } from "astro:content";
+
+const experienceEntries = await getCollection("experiences");
+const experiences = experienceEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({
+    id: entry.id,
+    ...entry.data,
+    description: entry.body.trim().split('\n\n'),
+  }));
 ---
 
 <Layout
@@ -20,7 +30,7 @@ import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
 
     <!-- Timeline Container -->
     <div class="relative max-w-[1200px] mx-auto px-4 md:px-16 py-8 min-h-screen">
-      <ExperienceTimeline client:only="vue" />
+      <ExperienceTimeline client:only="vue" experiences={experiences} />
     </div>
   </div>
 </Layout>

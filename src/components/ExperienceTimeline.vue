@@ -8,7 +8,7 @@
 
     <!-- Timeline Items -->
     <div
-      v-for="(exp, index) in experiences"
+      v-for="(exp, index) in props.experiences"
       :key="exp.id"
       class="timeline-item relative grid grid-cols-[1fr_auto_1fr] gap-8 mb-16 items-center last:mb-0"
       :class="{ 'item-left': index % 2 === 0, 'item-right': index % 2 !== 0 }"
@@ -17,7 +17,6 @@
       <!-- Timeline Marker -->
       <div
         class="timeline-marker relative w-6 h-6 z-2 flex items-center justify-center opacity-0"
-        :class="`marker-${exp.type}`"
       >
         <div
           class="marker-inner w-4 h-4 rounded-full bg-white/20 border-[3px] border-white/70 relative z-[2] transition-all duration-300"
@@ -40,7 +39,13 @@ import { onMounted, onUnmounted, ref } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TimelineCard from "./TimelineCard.vue";
-import { experiences } from "@/data/experience";
+import type { Experience } from "@/data/experience";
+
+interface Props {
+  experiences: Experience[];
+}
+
+const props = defineProps<Props>();
 
 gsap.registerPlugin(ScrollTrigger);
 
