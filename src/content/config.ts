@@ -9,7 +9,7 @@ const experiences = defineCollection({
     startDate: z.string(),
     endDate: z.string().nullable(),
     technologies: z.array(z.string()),
-    technologiesHidden: z.array(z.string()),
+    technologiesHidden: z.array(z.string()).optional(),
     companyLogo: z.string().optional(),
     companyUrl: z.string().optional(),
     projectUrls: z
