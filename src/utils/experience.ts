@@ -41,19 +41,12 @@ export function groupExperiencesByCompany(
     const firstExp = exps[0];
     if (!firstExp) continue;
 
-    // Combine aiSummary from all roles, or create a default one
-    const combinedAiSummary = sortedRoles
-      .filter((r) => r.aiSummary)
-      .map((r) => r.aiSummary)
-      .join(" ");
-
     const grouped: GroupedExperience = {
       ...firstExp,
       id: `${company.toLowerCase().replace(/\s+/g, "-")}-grouped`,
       company,
       roles: sortedRoles,
-      aiSummary:
-        combinedAiSummary || `${sortedRoles.length} roles at ${company}`,
+      aiSummary: firstExp.aiSummary ?? exps[1]?.aiSummary
     };
 
     result.push(grouped);

@@ -19,46 +19,9 @@ interface Props {
   >
     <CanvasBackground client:only="vue" />
     <Nav />
-    <main class="flex-1 pt-24 pb-12">
+    <main class="flex-1 pt-24 pb-12 relative z-(--z-index-content)">
       <slot />
     </main>
     <Footer />
   </body>
 </html>
-
-<script>
-  const root = document.querySelector(":root") as HTMLElement | undefined;
-
-  if (root) {
-    function getRandomItem<T>(arr: readonly T[]): T {
-      const index = Math.floor(Math.random() * arr.length);
-      return arr[index]!;
-    }
-
-    function getRandomColor() {
-      const randomColor = [
-        "red",
-        "pink",
-        "teal",
-        "sky",
-        "indigo",
-        "yellow",
-        "purple",
-        "lime",
-      ];
-      const randomNumber = [3, 4, 5, 6, 7, 8, 9, 10, 11];
-      const color = getRandomItem(randomColor);
-      const number = getRandomItem(randomNumber);
-      return `${color}-${number}`;
-    }
-
-    root.style.setProperty(
-      "--color-bg-selection",
-      `var(--${getRandomColor()})`,
-    );
-    root.style.setProperty(
-      "--color-text-selection",
-      `var(--${getRandomColor()})`,
-    );
-  }
-</script>

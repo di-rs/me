@@ -47,18 +47,16 @@ defineProps<Props>();
 
 <style scoped>
 .ai-summary {
-  /* Subtle glow effect */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease;
-  /* Prevent jumping by isolating from parent transforms */
   transform: translateZ(0);
   backface-visibility: hidden;
 }
 
 .ai-summary:hover {
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-border-strong);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 </style>
