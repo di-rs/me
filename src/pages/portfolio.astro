@@ -3,7 +3,14 @@ import Layout from "@/layouts/Layout.astro";
 import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
 import { getCollection } from "astro:content";
 import type { Experience } from "@/types/experience";
-import { groupExperiencesByCompany } from "@/utils/experience";
+import {
+  groupExperiencesByCompany,
+  isGroupedExperience,
+} from "@/utils/experience";
+import {
+  generateExperienceSummary,
+  generateGroupedExperienceSummary,
+} from "@/utils/ai-summarizer";
 
 const experienceEntries = await getCollection("experiences");
 
@@ -11,20 +18,44 @@ const allExperiences: Experience[] = await Promise.all(
   experienceEntries
     .sort((a, b) => a.data.order - b.data.order)
     .map(async (entry) => {
+      const description =
+        entry.body
+          ?.trim()
+          .split("\n")
+          .filter((line: string) => line.trim().startsWith("-"))
+          .map((line: string) => line.trim().substring(1).trim()) || [];
+
+      // Generate AI summary for this experience
+      const aiSummary = await generateExperienceSummary(
+        description,
+        entry.data.role,
+        entry.data.company,
+      );
+
       return {
         id: entry.id,
         ...entry.data,
-        description:
-          entry.body
-            ?.trim()
-            .split("\n")
-            .filter((line: string) => line.trim().startsWith("-"))
-            .map((line: string) => line.trim().substring(1).trim()) || "",
+        description,
+        aiSummary,
       };
     }),
 );
 
-const experiences = groupExperiencesByCompany(allExperiences);
+const groupedExperiences = groupExperiencesByCompany(allExperiences);
+
+// Generate AI summaries for grouped experiences
+const experiences = await Promise.all(
+  groupedExperiences.map(async (exp) => {
+    if (isGroupedExperience(exp)) {
+      const aiSummary = await generateGroupedExperienceSummary(
+        exp.roles.map((r) => ({ role: r.role, description: r.description })),
+        exp.company,
+      );
+      return { ...exp, aiSummary };
+    }
+    return exp;
+  }),
+);
 ---
 
 <Layout

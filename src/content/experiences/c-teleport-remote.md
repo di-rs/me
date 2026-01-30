@@ -7,14 +7,20 @@ endDate: "2023-02"
 employmentType: "Remote"
 technologies:
   - "TypeScript"
-  - "Redux.js"
-  - "React.js"
+  - "Redux"
+  - "React"
   - "Next.js"
+  - "UI Kit"
+  - "Microfrontends"
+technologiesHidden:
+  - "Zustand"
+  - "Styled-components"
+  - "React Query"
+  - "Storybook"
 order: 3
 ---
 
 - Working on the main company app for flights bookings
-- Separating the main app into micro frontends
+- Separating the main app into microfrontends with MFE
 - Creating architecture and developing an internal UI Kit for the company
 - Developing and maintaining the core modules of the system
-- Code review

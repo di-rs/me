@@ -15,6 +15,7 @@
     "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/vue": "^5.1.4",
+    "@huggingface/transformers": "^3.8.1",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",

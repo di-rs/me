@@ -7,8 +7,9 @@ endDate: "2022-02"
 employmentType: "Remote"
 technologies:
   - "TypeScript"
-  - "React.js"
-  - "Redux.js"
+  - "React"
+  - "Redux"
   - "Microfrontends"
+  - "Node.js"
 order: 4
 ---

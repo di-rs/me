@@ -7,11 +7,17 @@ endDate: "2025-10"
 employmentType: "On-site"
 technologies:
   - "TypeScript"
-  - "Redux.js"
   - "Bun"
-  - "Zustand"
-  - "React.js"
+  - "React"
   - "UI kit"
+  - "AI"
+technologiesHidden:
+  - "Next.js"
+  - "Zustand"
+  - "Styled-components"
+  - "React Query"
+  - "Storybook"
+  - "Tailwind CSS"
 order: 2
 ---
 

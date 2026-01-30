@@ -7,11 +7,19 @@ endDate: null
 employmentType: "On-site"
 technologies:
   - "TypeScript"
-  - "React.js"
+  - "React"
   - "AI"
   - "Bun"
-  - "Storybook"
   - "Nitro"
+  - "Tailwind"
+technologiesHidden:
+  - "Storybook"
+  - "Zustand"
+  - "Styled-components"
+  - "React Query"
+  - "Storybook"
+  - "UI Kit"
+  - "Design Systems"
 order: 1
 ---
 

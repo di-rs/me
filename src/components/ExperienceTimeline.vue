@@ -14,6 +14,13 @@
       :class="{ 'item-left': index % 2 === 0, 'item-right': index % 2 !== 0 }"
       :data-index="index"
     >
+      <!-- AI Summary (on opposite side) -->
+      <div
+        class="ai-summary-wrapper relative z-1 flex items-center justify-center opacity-0 hidden lg:flex will-change-transform"
+      >
+        <AISummary :summary="exp.aiSummary" />
+      </div>
+
       <!-- Timeline Marker -->
       <div
         class="timeline-marker relative w-6 h-6 z-2 items-center justify-center opacity-0 hidden lg:flex"
@@ -39,6 +46,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TimelineCard from "./TimelineCard.vue";
+import AISummary from "./timeline-card/AISummary.vue";
 import type { DisplayExperience } from "@/utils/experience";
 
 interface Props {
@@ -143,7 +151,36 @@ const initTimelineAnimations = () => {
     });
   });
 
-  // 3. Animate Timeline Cards
+  // 3. Animate AI Summaries (opposite side)
+  const summaries = gsap.utils.toArray(".ai-summary-wrapper") as HTMLElement[];
+
+  summaries.forEach((summary: HTMLElement, i: number) => {
+    const isLeft = i % 2 === 0;
+
+    // Set initial state
+    gsap.set(summary, {
+      opacity: 0,
+      x: isLeft ? 40 : -40,
+      scale: 0.95,
+    });
+
+    // Fade in and slide from opposite side
+    gsap.to(summary, {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      scrollTrigger: {
+        trigger: summary,
+        start: "top 85%",
+        toggleActions: "play none none none",
+      },
+      duration: 0.9,
+      ease: "power3.out",
+      delay: 0.4,
+    });
+  });
+
+  // 4. Animate Timeline Cards
   const wrappers = gsap.utils.toArray(
     ".timeline-card-wrapper",
   ) as HTMLElement[];
@@ -240,11 +277,11 @@ const initTimelineAnimations = () => {
 <style scoped>
 /* Only keeping grid-template-areas which is not easily done in Tailwind */
 .item-left {
-  grid-template-areas: "card marker empty";
+  grid-template-areas: "card marker summary";
 }
 
 .item-right {
-  grid-template-areas: "empty marker card";
+  grid-template-areas: "summary marker card";
 }
 
 .timeline-marker {
@@ -253,6 +290,10 @@ const initTimelineAnimations = () => {
 
 .timeline-card-wrapper {
   grid-area: card;
+}
+
+.ai-summary-wrapper {
+  grid-area: summary;
 }
 
 /* Responsive */

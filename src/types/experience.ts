@@ -6,6 +6,7 @@ export interface Experience extends Omit<
 > {
   id: string;
   description: string[];
+  aiSummary?: string;
 }
 
 // For grouped experiences (multiple roles at same company)
@@ -15,4 +16,5 @@ export interface GroupedExperience extends Omit<
 > {
   id: string;
   roles: Experience[];
+  aiSummary?: string;
 }
