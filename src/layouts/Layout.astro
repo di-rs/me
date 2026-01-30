@@ -12,12 +12,12 @@ interface Props {
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" class="lenis lenis-smooth">
   <BaseHead {...Astro.props} />
   <body class="bg-bg-primary text-text-primary relative overflow-x-hidden">
     <CanvasBackground client:only="vue" />
     <Nav />
-    <main class="grid gap-8 items-start">
+    <main>
       <slot />
     </main>
     <Footer />

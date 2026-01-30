@@ -2,16 +2,93 @@
 import Layout from "@/layouts/Layout.astro";
 import HeroSection from "@/components/HeroSection.astro";
 import ProfileCanvas from "@/components/ProfileCanvas.vue";
+import TechShowcase from "@/components/TechShowcase.astro";
 ---
 
 <Layout>
-  <section class="px-6 md:px-24 max-w-7xl mx-auto py-4 md:py-24">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div class="flex justify-center">
-        <ProfileCanvas client:only="vue" />
-      </div>
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <!-- Hero Section - Full Screen -->
+      <section class="hero-section px-6 md:px-12">
+        <div
+          class="grid md:grid-cols-2 gap-12 items-center max-w-7xl mx-auto w-full"
+        >
+          <div class="flex justify-center">
+            <ProfileCanvas client:only="vue" />
+          </div>
 
-      <HeroSection />
+          <HeroSection />
+        </div>
+      </section>
+
+      <!-- Tech Showcase Section - Full Screen -->
+      <section class="tech-section">
+        <TechShowcase />
+      </section>
     </div>
-  </section>
+  </div>
 </Layout>
+
+<script>
+  import Lenis from "lenis";
+
+  // Initialize Lenis smooth scroll
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: "vertical",
+    gestureOrientation: "vertical",
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 2,
+    infinite: false,
+  });
+
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+  // Optional: Add scroll-triggered animations
+  if (typeof window !== "undefined") {
+    lenis.on("scroll", () => {
+      // You can add custom scroll-triggered animations here
+    });
+  }
+</script>
+
+<style>
+  .hero-section {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .tech-section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Ensure smooth scrolling container */
+  #smooth-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  #smooth-content {
+    position: relative;
+  }
+
+  /* Account for fixed header if needed */
+  @supports (height: 100dvh) {
+    .hero-section {
+      min-height: 100dvh;
+    }
+  }
+</style>
