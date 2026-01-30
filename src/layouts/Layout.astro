@@ -14,10 +14,12 @@ interface Props {
 <!doctype html>
 <html lang="en" data-theme="dark" class="lenis lenis-smooth">
   <BaseHead {...Astro.props} />
-  <body class="bg-bg-primary text-text-primary relative overflow-x-hidden">
+  <body
+    class="bg-bg-primary text-text-primary relative overflow-x-hidden min-h-screen flex flex-col"
+  >
     <CanvasBackground client:only="vue" />
     <Nav />
-    <main>
+    <main class="flex-1 pt-24 pb-12">
       <slot />
     </main>
     <Footer />
