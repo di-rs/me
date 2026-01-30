@@ -14,7 +14,6 @@ technologies:
 technologiesHidden:
   - "UI Kit"
   - "Design Systems"
-order: 6
 ---
 
 - Developing high-efficient and high-load SPA applications

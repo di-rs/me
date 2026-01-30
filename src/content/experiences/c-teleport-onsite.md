@@ -17,8 +17,8 @@ technologiesHidden:
   - "Styled-components"
   - "React Query"
   - "Storybook"
+  - "Monorepos"
   - "Tailwind CSS"
-order: 2
 ---
 
 - Core maintainer of UI Kit

@@ -13,7 +13,6 @@ technologies:
   - "Flask"
   - "Python"
   - "Typescript"
-order: 7
 ---
 
 - Establishing and developing SPA applications

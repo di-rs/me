@@ -16,8 +16,8 @@ technologiesHidden:
   - "Zustand"
   - "Styled-components"
   - "React Query"
+  - "Monorepos"
   - "Storybook"
-order: 3
 ---
 
 - Working on the main company app for flights bookings

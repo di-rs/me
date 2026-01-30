@@ -29,9 +29,13 @@ export function groupExperiencesByCompany(
     }
 
     // Multiple roles - create grouped experience
-    // Sort roles by start date (most recent first)
+    // Sort roles by start date (most recent first), then by order if dates are the same
     const sortedRoles = [...exps].sort((a, b) => {
-      return b.startDate.localeCompare(a.startDate);
+      const dateComparison = b.startDate.localeCompare(a.startDate);
+      if (dateComparison === 0) {
+        return (a.order || 0) - (b.order || 0);
+      }
+      return dateComparison;
     });
 
     const firstExp = exps[0];

@@ -12,6 +12,7 @@ technologies:
   - "React"
   - "Microfrontends"
 technologiesHidden:
+  - "Monorepos"
   - "Storybook"
   - "Zustand"
   - "Styled-components"

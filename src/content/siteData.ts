@@ -29,20 +29,28 @@ export const techShowcase = {
   techStacks: [
     {
       id: 1,
-      technologies: ["React", "Next.js", "Vue.js", "Svelte", "Astro"],
+      technologies: ["React", "Next.js", "Vue.js", "Svelte", "Astro", "Remix"],
     },
     {
       id: 2,
-      technologies: ["TypeScript", "Node.js", "Bun", "Nitro", "Nuxt.js"],
+      technologies: [
+        "TypeScript",
+        "Node.js",
+        "Bun",
+        "Nitro",
+        "Nuxt.js",
+        "MCPs",
+      ],
     },
     {
       id: 3,
       technologies: [
-        "Tailwind CSS",
+        "Vibe coding",
+        "Tailwind",
         "Framer Motion",
         "Storybook",
         "AI Agents",
-        "Remix",
+        "tRPC",
       ],
     },
     {
@@ -52,7 +60,8 @@ export const techShowcase = {
         "AI",
         "Microfrontends",
         "Frontend Architecture",
-        "MCPs",
+        "State management",
+        "Monorepos",
       ],
     },
   ],

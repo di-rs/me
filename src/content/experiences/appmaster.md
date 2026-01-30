@@ -13,7 +13,6 @@ technologies:
 technologiesHidden:
   - "UI Kit"
   - "Design Systems"
-order: 5
 ---
 
 - Worked on establishing new interface, UI kit using Ant design

@@ -16,7 +16,15 @@ const experienceEntries = await getCollection("experiences");
 
 const allExperiences: Experience[] = await Promise.all(
   experienceEntries
-    .sort((a, b) => a.data.order - b.data.order)
+    .sort((a, b) => {
+      // Sort by startDate (most recent first)
+      const dateComparison = b.data.startDate.localeCompare(a.data.startDate);
+      // If start dates are the same, use order field
+      if (dateComparison === 0) {
+        return (a.data.order || 0) - (b.data.order || 0);
+      }
+      return dateComparison;
+    })
     .map(async (entry) => {
       const description =
         entry.body

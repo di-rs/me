@@ -11,16 +11,17 @@ technologies:
   - "AI"
   - "Bun"
   - "Nitro"
-  - "Tailwind"
+  - "Vibe coding"
 technologiesHidden:
+  - "Tailwind"
   - "Storybook"
   - "Zustand"
   - "Styled-components"
   - "React Query"
   - "Storybook"
   - "UI Kit"
+  - "Monorepos"
   - "Design Systems"
-order: 1
 ---
 
 - AI Enthusiast, hugely leveraging AI tools for efficiency
