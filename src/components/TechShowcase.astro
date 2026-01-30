@@ -26,11 +26,7 @@ const { title, startYear, titleSuffix, subtitle, techStacks } = techShowcase;
     <div
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7 lg:gap-8 w-full"
     >
-      {
-        techStacks.map((tech) => (
-          <TechCard technologies={tech.technologies} delay={tech.id * 200} />
-        ))
-      }
+      {techStacks.map((tech) => <TechCard technologies={tech.technologies} />)}
     </div>
   </div>
 </div>

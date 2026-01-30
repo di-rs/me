@@ -4,8 +4,7 @@ import { computed, onUnmounted, ref, watch } from "vue";
 
 const props = withDefaults(defineProps<Props>(), {
   revealDelayMs: 50,
-  charset:
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-={}[];:,.<>/?",
+  charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@",
   flipDelayMs: 50,
 });
 

@@ -1,45 +1,42 @@
-import { pipeline, env } from "@huggingface/transformers";
+import {
+  pipeline,
+  env,
+  type SummarizationOutput,
+} from "@huggingface/transformers";
 
 // Configure for Node.js environment
 env.allowLocalModels = false;
 env.useBrowserCache = false;
 
-let summarizer: any = null;
-let initializationAttempted = false;
-
 /**
- * Initialize the summarization pipeline
- * Using distilbart-cnn-6-6 model
+ * Run AI summarization with a given prompt
+ * @param prompt The text to summarize
+ * @param maxLength Maximum length of summary
+ * @param minLength Minimum length of summary
+ * @returns Summary text or empty string on error
  */
-async function getSummarizer() {
-  if (!summarizer && !initializationAttempted) {
-    initializationAttempted = true;
-    try {
-      console.log("Initializing AI summarization model...");
-      summarizer = await pipeline("summarization", "Xenova/distilbart-cnn-6-6");
-      console.log("Summarizer initialized successfully");
-    } catch (error) {
-      console.error("Failed to initialize summarizer:", error);
-      return null;
-    }
-  }
-  return summarizer;
-}
+async function runSummarization(
+  prompt: string,
+  maxLength: number,
+  minLength: number,
+): Promise<string> {
+  try {
+    const model = await pipeline("summarization", "Xenova/distilbart-cnn-6-6");
 
-/**
- * Create a fallback summary from description
- */
-function createFallbackSummary(description: string[]): string {
-  if (!description || description.length === 0) {
+    const result = await model(prompt, {
+      max_length: maxLength,
+      min_length: minLength,
+      do_sample: false,
+    } as Parameters<typeof model>[1]);
+
+    // Handle both single and array responses
+    const output = Array.isArray(result) ? result : [result];
+    const summary = (output as SummarizationOutput)[0]?.summary_text || "";
+    return summary.trim();
+  } catch (error) {
+    console.error("Error running summarization:", error);
     return "";
   }
-  const firstPoint = description[0];
-  if (!firstPoint) {
-    return "";
-  }
-  return firstPoint.length > 100
-    ? firstPoint.substring(0, 100) + "..."
-    : firstPoint;
 }
 
 /**
@@ -54,29 +51,12 @@ export async function generateExperienceSummary(
   role: string,
   company: string,
 ): Promise<string> {
-  try {
-    const model = await getSummarizer();
+  // Create a better prompt focusing on what the person accomplished/did
+  const accomplishments = description.join(". ");
+  const prompt = `As a ${role} at ${company}, this person's key accomplishments and responsibilities included: ${accomplishments}`;
 
-    if (!model) {
-      return createFallbackSummary(description);
-    }
-
-    // Create a better prompt focusing on what the person accomplished/did
-    const accomplishments = description.join(". ");
-    const fullText = `As a ${role} at ${company}, this person's key accomplishments and responsibilities included: ${accomplishments}`;
-
-    const result = await model(fullText, {
-      max_length: 60,
-      min_length: 20,
-      do_sample: false,
-    });
-
-    const summary = result[0]?.summary_text || "";
-    return summary.trim() || createFallbackSummary(description);
-  } catch (error) {
-    console.error("Error generating AI summary:", error);
-    return createFallbackSummary(description);
-  }
+  const summary = await runSummarization(prompt, 60, 20);
+  return summary || "";
 }
 
 /**
@@ -86,31 +66,13 @@ export async function generateGroupedExperienceSummary(
   roles: Array<{ role: string; description: string[] }>,
   company: string,
 ): Promise<string> {
-  try {
-    const model = await getSummarizer();
+  // Create a better prompt focusing on career progression and accomplishments
+  const rolesText = roles
+    .map((r) => `As ${r.role}, accomplished: ${r.description.join(". ")}`)
+    .join(". Then, ");
 
-    if (!model) {
-      return `${roles.length} roles at ${company}`;
-    }
+  const prompt = `During the career at ${company}, this person progressed through ${roles.length} roles. ${rolesText}`;
 
-    // Create a better prompt focusing on career progression and accomplishments
-    const rolesText = roles
-      .map((r) => `As ${r.role}, accomplished: ${r.description.join(". ")}`)
-      .join(". Then, ");
-
-    const fullText = `During the career at ${company}, this person progressed through ${roles.length} roles. ${rolesText}`;
-
-    const result = await model(fullText, {
-      max_length: 80,
-      min_length: 30,
-      do_sample: false,
-    });
-
-    return (
-      result[0]?.summary_text?.trim() || `${roles.length} roles at ${company}`
-    );
-  } catch (error) {
-    console.error("Error generating grouped summary:", error);
-    return `${roles.length} roles at ${company}`;
-  }
+  const summary = await runSummarization(prompt, 80, 30);
+  return summary || `${roles.length} roles at ${company}`;
 }

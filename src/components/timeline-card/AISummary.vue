@@ -6,7 +6,7 @@
     <!-- AI Badge -->
     <div class="flex items-center gap-1.5 mb-2 h-[20px]">
       <svg
-        class="w-3.5 h-3.5 text-text-accent flex-shrink-0"
+        class="w-3.5 h-3.5 text-text-accent shrink-0"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -29,8 +29,8 @@
     <!-- Encrypted Summary Text -->
     <EncryptedText
       :text="summary"
-      class="text-xs text-text-secondary"
-      encrypted-class="text-text-tertiary/40"
+      class="text-xs"
+      encrypted-class="text-text-secondary"
       revealed-class="text-text-secondary"
       :reveal-delay-ms="20"
       :flip-delay-ms="30"

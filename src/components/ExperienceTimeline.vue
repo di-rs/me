@@ -18,7 +18,7 @@
       <div
         class="ai-summary-wrapper relative z-1 flex items-center justify-center opacity-0 hidden lg:flex will-change-transform"
       >
-        <AISummary :summary="exp.aiSummary" />
+        <AISummary v-if="exp.aiSummary" :summary="exp.aiSummary" />
       </div>
 
       <!-- Timeline Marker -->
