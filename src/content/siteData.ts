@@ -20,3 +20,40 @@ export const social = {
   linkedin: "https://linkedin.com/in/popov-dmitriy",
   email: "mailto:ai@dimaportish.com",
 };
+
+export const techShowcase = {
+  title: "I am an experienced developer with",
+  startYear: 2019,
+  titleSuffix: "of expertice",
+  subtitle: "High proficiency in the following technologies",
+  techStacks: [
+    {
+      id: 1,
+      technologies: ["React", "Next.js", "Vue.js", "Svelte", "Astro"],
+    },
+    {
+      id: 2,
+      technologies: ["TypeScript", "Node.js", "Bun", "Nitro", "Nuxt.js"],
+    },
+    {
+      id: 3,
+      technologies: [
+        "Tailwind CSS",
+        "Framer Motion",
+        "Storybook",
+        "AI Agents",
+        "Remix",
+      ],
+    },
+    {
+      id: 4,
+      technologies: [
+        "Design Systems",
+        "AI",
+        "Microfrontends",
+        "Frontend Architecture",
+        "MCPs",
+      ],
+    },
+  ],
+};
