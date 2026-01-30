@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
 import { getCollection } from "astro:content";
-import type { Experience } from "@/data/experience";
+import type { Experience } from "@/types/experience";
 import { groupExperiencesByCompany } from "@/utils/experience";
 
 const experienceEntries = await getCollection("experiences");
@@ -29,7 +29,7 @@ const experiences = groupExperiencesByCompany(allExperiences);
   title="Dima Portfolio | Experience"
   description="Explore my professional journey, work experience, and achievements in software engineering and web development."
 >
-  <div class="relative w-full p-0 bg-bg-primary min-h-screen">
+  <div class="relative w-full p-0 min-h-screen">
     <!-- Section Header -->
     <div class="text-center mb-6 px-8">
       <h2

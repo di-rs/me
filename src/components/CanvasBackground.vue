@@ -54,13 +54,13 @@ onMounted(() => {
       lineColor = getColorFromVar("--color-text-secondary");
 
       // Create minimal particles
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 40; i++) {
         particles.push({
           x: p.random(p.width),
           y: p.random(p.height),
           vx: p.random(-0.2, 0.2),
           vy: p.random(-0.2, 0.2),
-          size: p.random(0.5, 2.5),
+          size: p.random(0.8, 2.5),
         });
       }
     };
@@ -79,17 +79,17 @@ onMounted(() => {
 
         // Draw particle using CSS variable color
         p.noStroke();
-        p.fill(particleColor[0], particleColor[1], particleColor[2], 65);
+        p.fill(particleColor[0], particleColor[1], particleColor[2], 80);
         p.circle(particle.x, particle.y, particle.size);
 
         // Draw connections
         particles.slice(i + 1).forEach((other) => {
           const distance = p.dist(particle.x, particle.y, other.x, other.y);
 
-          if (distance < 150) {
-            const alpha = p.map(distance, 0, 150, 40, 0);
+          if (distance < 170) {
+            const alpha = p.map(distance, 0, 170, 55, 0);
             p.stroke(lineColor[0], lineColor[1], lineColor[2], alpha);
-            p.strokeWeight(0.5);
+            p.strokeWeight(0.6);
             p.line(particle.x, particle.y, other.x, other.y);
           }
         });

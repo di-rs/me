@@ -2,7 +2,7 @@
   <div class="relative" ref="containerRef">
     <!-- Subtle Timeline Line -->
     <div
-      class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 scale-y-0 origin-top z-0 pointer-events-none will-change-transform bg-gradient-to-b from-text-secondary/15 via-text-secondary/10 to-text-secondary/5 hidden lg:block"
+      class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 scale-y-0 origin-top z-0 pointer-events-none will-change-transform bg-linear-to-b from-text-secondary/15 via-text-secondary/10 to-text-secondary/5 hidden lg:block"
       ref="timelineLineRef"
     ></div>
 
@@ -19,15 +19,15 @@
         class="timeline-marker relative w-6 h-6 z-2 items-center justify-center opacity-0 hidden lg:flex"
       >
         <div
-          class="marker-inner w-4 h-4 rounded-full bg-white/20 border-[3px] border-white/70 relative z-[2] transition-all duration-300"
+          class="marker-inner w-4 h-4 rounded-full bg-white/20 border-[3px] border-white/70 relative z-2 transition-all duration-300"
         ></div>
         <div
-          class="marker-ring absolute w-full h-full rounded-full border-2 border-white/50 opacity-50 z-[1]"
+          class="marker-ring absolute w-full h-full rounded-full border-2 border-white/50 opacity-50 z-1"
         ></div>
       </div>
 
       <!-- Timeline Card -->
-      <div class="timeline-card-wrapper relative z-[1] min-h-[200px] opacity-0">
+      <div class="timeline-card-wrapper relative z-1 min-h-[200px] opacity-0">
         <TimelineCard :experience="exp" :index="index" />
       </div>
     </div>

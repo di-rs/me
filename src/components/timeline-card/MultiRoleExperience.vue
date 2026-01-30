@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import type { GroupedExperience } from "@/data/experience";
+import type { GroupedExperience } from "@/types/experience";
 import { formatDateRange } from "@/utils/date";
 import CompanyHeader from "./CompanyHeader.vue";
 import DescriptionList from "./DescriptionList.vue";

@@ -6,7 +6,7 @@
     <img
       :src="src"
       :alt="alt"
-      class="w-full h-full object-contain grayscale-[30%] brightness-90 transition-[filter] duration-300 group-hover:grayscale-0 group-hover:brightness-100"
+      class="w-full h-full object-contain grayscale-30 brightness-90 transition-[filter] duration-300 group-hover:grayscale-0 group-hover:brightness-100"
     />
   </div>
 </template>

@@ -4,7 +4,7 @@
     class="absolute left-0 right-0 h-px pointer-events-none"
   >
     <div
-      class="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-text-secondary/10 via-gray-300/30 via-text-secondary/10 to-transparent bg-[length:200%_100%]"
+      class="absolute inset-0 animate-shimmer bg-linear-to-r from-transparent via-gray-300/30 to-transparent bg-size-[200%_100%]"
       :style="{
         animationDelay: `${delay}s`,
       }"

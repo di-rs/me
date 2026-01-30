@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Experience } from "@/data/experience";
+import type { Experience } from "@/types/experience";
 import { formatDateRange } from "@/utils/date";
 import RoleHeader from "./RoleHeader.vue";
 import DescriptionList from "./DescriptionList.vue";
