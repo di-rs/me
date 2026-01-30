@@ -1,10 +1,10 @@
 <template>
-  <div class="relative" ref="containerRef">
+  <div ref="containerRef" class="relative">
     <!-- Subtle Timeline Line -->
     <div
-      class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 scale-y-0 origin-top z-0 pointer-events-none will-change-transform bg-linear-to-b from-text-secondary/15 via-text-secondary/10 to-text-secondary/5 hidden lg:block"
       ref="timelineLineRef"
-    ></div>
+      class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 scale-y-0 origin-top z-0 pointer-events-none will-change-transform bg-linear-to-b from-text-secondary/15 via-text-secondary/10 to-text-secondary/5 hidden lg:block"
+    />
 
     <!-- Timeline Items -->
     <div
@@ -20,10 +20,10 @@
       >
         <div
           class="marker-inner w-4 h-4 rounded-full bg-white/20 border-[3px] border-white/70 relative z-2 transition-all duration-300"
-        ></div>
+        />
         <div
           class="marker-ring absolute w-full h-full rounded-full border-2 border-white/50 opacity-50 z-1"
-        ></div>
+        />
       </div>
 
       <!-- Timeline Card -->
@@ -98,7 +98,7 @@ const initTimelineAnimations = () => {
   }
 
   // 2. Animate Timeline Markers
-  gsap.utils.toArray(".timeline-marker").forEach((marker: any) => {
+  gsap.utils.toArray<HTMLElement>(".timeline-marker").forEach((marker) => {
     // Set initial state
     gsap.set(marker, {
       scale: 0,

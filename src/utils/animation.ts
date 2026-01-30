@@ -5,7 +5,7 @@ export function createTiltHandler() {
   let ticking = false;
 
   return {
-    handleMouseEnter: (_e: MouseEvent) => {
+    handleMouseEnter: () => {
       // Trigger hover animation (handled by CSS)
     },
 

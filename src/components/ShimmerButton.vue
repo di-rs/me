@@ -45,6 +45,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   variant: "primary",
   download: false,
+  href: undefined,
 });
 
 const buttonClasses = computed(() => {

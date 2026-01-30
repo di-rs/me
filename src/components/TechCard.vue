@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import AnimatedText from "./AnimatedText.vue";
 
-const props = defineProps<{
+defineProps<{
   technologies: string[];
   delay?: number;
 }>();
@@ -13,12 +13,12 @@ const isHovered = ref(false);
 <template>
   <div
     class="tech-card"
+    :class="{ hovered: isHovered }"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
-    :class="{ hovered: isHovered }"
   >
-    <div class="card-glow"></div>
-    <div class="card-border"></div>
+    <div class="card-glow" />
+    <div class="card-border" />
     <div class="card-content">
       <AnimatedText :texts="technologies" :interval="2500" />
     </div>

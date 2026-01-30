@@ -2,7 +2,7 @@
   <div
     class="relative w-full h-full min-h-[80vh] flex items-center justify-center"
   >
-    <div ref="container" class="w-full h-full min-h-[80vh]"></div>
+    <div ref="container" class="w-full h-full min-h-[80vh]" />
     <div
       class="absolute inset-0 flex items-center justify-center pointer-events-none"
     >

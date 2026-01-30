@@ -4,7 +4,7 @@
       ref="container"
       class="w-full h-full transition-transform duration-300 ease-out hover:scale-110 cursor-pointer relative z-10"
       @click="triggerWave"
-    ></div>
+    />
   </div>
 </template>
 
@@ -25,7 +25,6 @@ interface WaveRing {
 }
 
 const container = ref<HTMLDivElement | null>(null);
-let waveP5Instance: p5 | null = null;
 
 // Helper to get color from CSS variable
 const getColorFromVar = (varName: string): [number, number, number] => {

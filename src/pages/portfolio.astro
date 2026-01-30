@@ -9,8 +9,8 @@ const experienceEntries = await getCollection("experiences");
 
 // Convert entries to Experience objects
 const allExperiences: Experience[] = experienceEntries
-  .sort((a: any, b: any) => a.data.order - b.data.order)
-  .map((entry: any) => ({
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({
     id: entry.id,
     ...entry.data,
     description:
