@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import TextHighlight from "./TextHighlight.vue";
+import TextHighlight from "./ui/TextHighlight.vue";
 
 const props = defineProps<{
   startYear: number;

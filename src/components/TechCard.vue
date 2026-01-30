@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import AnimatedText from "./AnimatedText.vue";
+import AnimatedText from "./ui/AnimatedText.vue";
 
 defineProps<{
   technologies: string[];
