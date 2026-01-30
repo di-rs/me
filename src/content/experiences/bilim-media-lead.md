@@ -5,18 +5,21 @@ location: "Kazakhstan"
 startDate: "2019-12"
 endDate: "2020-07"
 employmentType: "Full-time"
+aiSummary: "Progressed from Full-stack Developer to Lead Frontend, managing team of 4 while building high-load educational platform serving 10M users with genetic scheduling algorithms."
 technologies:
-  - "React.js"
-  - "Vue.js"
+  - "React"
+  - "Vue"
   - "Node.js"
-  - "Redux.js"
-order: 6
+  - "Redux"
+  - "Typescript"
+technologiesHidden:
+  - "UI Kit"
+  - "Design Systems"
 ---
 
-- Developing high-efficient and high load applications
+- Developing high-efficient and high-load SPA applications
+- Managing the team of 4 frontend developers
 - The main project is onlinemektep.org
 - Daily amount is 1 million unique users and the whole amount of customers through the product is 10 million
-- Managing the team of 4 frontend developers
-- Mentoring and Code reviewing
 - Discussing the business plan and product direction and developing the short and long term plans
 - Daily support and independent management of internal product projects: a constructor for creating lessons, a platform for launching lessons

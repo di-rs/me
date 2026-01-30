@@ -22,8 +22,16 @@ const experiences = defineCollection({
       .optional(),
     achievements: z.array(z.string()).optional(),
     employmentType: z.string().optional(),
-    order: z.number(),
+    order: z.number().optional(),
+    aiSummary: z.string(),
   }),
 });
 
-export const collections = { experiences };
+const about = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
+export const collections = { experiences, about };

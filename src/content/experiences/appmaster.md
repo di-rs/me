@@ -5,15 +5,19 @@ location: "San Francisco Bay Area"
 startDate: "2020-07"
 endDate: "2021-06"
 employmentType: "Remote"
+aiSummary: "Built core architecture and UI kit for no-code platform using Vue 3, establishing foundation for all major modules."
 technologies:
-  - "Vue.js"
+  - "Vue 2/3"
+  - "Nuxt"
   - "TypeScript"
   - "Vuex"
-order: 5
+technologiesHidden:
+  - "UI Kit"
+  - "Design Systems"
 ---
 
 - Worked on establishing new interface, UI kit using Ant design
 - Developed architecture for all core modules in the project
 - Worked on business development of the project from the tech side
 - Communication with the development team: backend, designers, product managers, QA
-- Code refactoring
+- Code review, refactoring

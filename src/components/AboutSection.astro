@@ -1,0 +1,93 @@
+---
+import { getCollection } from "astro:content";
+
+const aboutEntries = await getCollection("about");
+const aboutEntry = aboutEntries[0]!;
+const { Content } = await aboutEntry.render();
+---
+
+<section class="relative w-full mb-16">
+  <div class="max-w-[1200px] mx-auto px-8 md:px-16">
+    <div class="p-6 md:p-8 backdrop-blur-sm">
+      <div class="about-content">
+        <Content />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Custom list styling to match the site aesthetic */
+  .about-content :global(ul) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .about-content :global(li) {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .about-content :global(li::before) {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-text-muted);
+    font-weight: normal;
+  }
+
+  /* Buzzword highlight effect */
+  .about-content :global(strong) {
+    position: relative;
+    display: inline-block;
+    color: var(--color-text-primary);
+    font-weight: 600;
+    padding: 0 0.2em;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      transparent 50%,
+      rgba(163, 163, 163, 0.15) 50%,
+      rgba(163, 163, 163, 0.15) 100%
+    );
+    background-size: 220% 100%;
+    background-position: 100% 0;
+    transition: background-position 0.5s ease;
+  }
+
+  .about-content :global(strong::after) {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0.1em;
+    width: 100%;
+    height: 0.1em;
+    background: linear-gradient(
+      90deg,
+      rgba(163, 163, 163, 0.3),
+      rgba(229, 229, 229, 0.5),
+      rgba(163, 163, 163, 0.3)
+    );
+    border-radius: 2px;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 0.4s ease;
+  }
+
+  .about-content :global(strong:hover) {
+    background-position: 0 0;
+  }
+
+  .about-content :global(strong:hover::after) {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+</style>

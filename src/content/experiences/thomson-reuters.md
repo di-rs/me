@@ -5,10 +5,12 @@ location: "Canada"
 startDate: "2021-06"
 endDate: "2022-02"
 employmentType: "Remote"
+aiSummary: ""
 technologies:
   - "TypeScript"
-  - "React.js"
-  - "Redux.js"
+  - "React"
+  - "Redux"
   - "Microfrontends"
+  - "Node.js"
 order: 4
 ---

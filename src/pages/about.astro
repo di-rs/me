@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const aboutEntries = await getCollection("about");
+const aboutEntry = aboutEntries[0]!;
+const { Content } = await aboutEntry.render();
+---
+
+<Layout
+  title="Dima Portfolio | About"
+  description="Learn more about my skills, expertise, and professional background in software engineering and web development."
+>
+  <section class="relative w-full mb-16">
+    <div class="max-w-[1200px] mx-auto px-8 md:px-16">
+      <div class="p-6 md:p-8 backdrop-blur-sm">
+        <div class="about-content">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Custom list styling to match the site aesthetic */
+  .about-content :global(ul) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px
+  }
+
+  .about-content :global(li) {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .about-content :global(li::before) {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-text-muted);
+    font-weight: normal;
+  }
+</style>

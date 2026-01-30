@@ -24,25 +24,33 @@ export const social = {
 export const techShowcase = {
   title: "I am an experienced developer with",
   startYear: 2019,
-  titleSuffix: "of expertice",
+  titleSuffix: "expertice",
   subtitle: "High proficiency in the following technologies",
   techStacks: [
     {
       id: 1,
-      technologies: ["React", "Next.js", "Vue.js", "Svelte", "Astro"],
+      technologies: ["React", "Next.js", "Vue.js", "Svelte", "Astro", "Remix"],
     },
     {
       id: 2,
-      technologies: ["TypeScript", "Node.js", "Bun", "Nitro", "Nuxt.js"],
+      technologies: [
+        "TypeScript",
+        "Node.js",
+        "Bun",
+        "Nitro",
+        "Nuxt.js",
+        "MCPs",
+      ],
     },
     {
       id: 3,
       technologies: [
-        "Tailwind CSS",
+        "Vibe coding",
+        "Tailwind",
         "Framer Motion",
         "Storybook",
         "AI Agents",
-        "Remix",
+        "tRPC",
       ],
     },
     {
@@ -52,7 +60,8 @@ export const techShowcase = {
         "AI",
         "Microfrontends",
         "Frontend Architecture",
-        "MCPs",
+        "State management",
+        "Monorepos",
       ],
     },
   ],

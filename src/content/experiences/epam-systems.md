@@ -5,19 +5,24 @@ location: "Canada"
 startDate: "2021-06"
 endDate: "2022-02"
 employmentType: "Hybrid"
+aiSummary: "Contracted to Thomson Reuters through EPAM, building microfrontend architecture while mentoring junior developers in React and TypeScript."
 technologies:
   - "Node.js"
   - "TypeScript"
-  - "Redux.js"
-  - "React.js"
+  - "Redux"
+  - "React"
   - "Microfrontends"
+technologiesHidden:
+  - "Monorepos"
+  - "Storybook"
+  - "Zustand"
+  - "Styled-components"
+  - "React Query"
+  - "Storybook"
 order: 3
 ---
 
 - Development projects using React + Redux & Microfrontends
-- Applied unit tests using Jest
-- Code review
-- Planning & Scrum events with teammates
+- Mentoring Junior Developers: React + Redux, Typescript, Next.js
+- Planning & Scrum events, corporate culture
 - Discussions of new features and functionalities of the service & understanding how to implement them
-- Refactoring & fixing bugs
-- Mentoring Junior Developers: React + Redux, Javascript

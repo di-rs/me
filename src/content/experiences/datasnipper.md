@@ -5,14 +5,24 @@ location: "Amsterdam, North Holland, Netherlands"
 startDate: "2025-10"
 endDate: null
 employmentType: "On-site"
+aiSummary: "Building innovative audit solutions with AI, creating internal WYSIWYG editor and POC features for alpha users."
 technologies:
   - "TypeScript"
-  - "React.js"
+  - "React"
   - "AI"
   - "Bun"
-  - "Storybook"
   - "Nitro"
-order: 1
+  - "Vibe coding"
+technologiesHidden:
+  - "Tailwind"
+  - "Storybook"
+  - "Zustand"
+  - "Styled-components"
+  - "React Query"
+  - "Storybook"
+  - "UI Kit"
+  - "Monorepos"
+  - "Design Systems"
 ---
 
 - AI Enthusiast, hugely leveraging AI tools for efficiency

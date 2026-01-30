@@ -8,17 +8,30 @@ import { groupExperiencesByCompany } from "@/utils/experience";
 const experienceEntries = await getCollection("experiences");
 
 const allExperiences: Experience[] = experienceEntries
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((entry) => ({
-    id: entry.id,
-    ...entry.data,
-    description:
+  .sort((a, b) => {
+    // Sort by startDate (most recent first)
+    const dateComparison = b.data.startDate.localeCompare(a.data.startDate);
+    // If start dates are the same, use order field
+    if (dateComparison === 0) {
+      return (a.data.order || 0) - (b.data.order || 0);
+    }
+    return dateComparison;
+  })
+  .map((entry) => {
+    const description =
       entry.body
         ?.trim()
         .split("\n")
         .filter((line: string) => line.trim().startsWith("-"))
-        .map((line: string) => line.trim().substring(1).trim()) || "",
-  }));
+        .map((line: string) => line.trim().substring(1).trim()) || [];
+
+    return {
+      id: entry.id,
+      ...entry.data,
+      description,
+      aiSummary: entry.data.aiSummary,
+    };
+  });
 
 const experiences = groupExperiencesByCompany(allExperiences);
 ---
