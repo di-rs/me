@@ -1,6 +1,6 @@
 ---
-import TechCard from "./TechCard.vue";
-import YearsHighlight from "./YearsHighlight.vue";
+import TechCard from "./TechCard.astro";
+import YearsHighlight from "./YearsHighlight.astro";
 import { techShowcase } from "../content/siteData";
 
 const { title, startYear, titleSuffix, subtitle, techStacks } = techShowcase;
@@ -14,7 +14,7 @@ const { title, startYear, titleSuffix, subtitle, techStacks } = techShowcase;
       class="text-[2rem] md:text-5xl lg:text-[3.5rem] font-bold text-text-primary mb-6 leading-[1.3]"
     >
       {title}
-      <YearsHighlight startYear={startYear} client:visible />
+      <YearsHighlight startYear={startYear} />
       {titleSuffix}
     </h2>
     <p
@@ -28,11 +28,7 @@ const { title, startYear, titleSuffix, subtitle, techStacks } = techShowcase;
     >
       {
         techStacks.map((tech) => (
-          <TechCard
-            technologies={tech.technologies}
-            delay={tech.id * 200}
-            client:visible
-          />
+          <TechCard technologies={tech.technologies} delay={tech.id * 200} />
         ))
       }
     </div>

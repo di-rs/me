@@ -24,7 +24,7 @@ export const social = {
 export const techShowcase = {
   title: "I am an experienced developer with",
   startYear: 2019,
-  titleSuffix: "of expertice",
+  titleSuffix: "expertice",
   subtitle: "High proficiency in the following technologies",
   techStacks: [
     {

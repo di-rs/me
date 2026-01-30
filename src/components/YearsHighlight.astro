@@ -1,0 +1,28 @@
+---
+import TextHighlight from "./ui/TextHighlight.astro";
+
+interface Props {
+  startYear: number;
+}
+
+const { startYear } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+const yearsOfExperience = currentYear - startYear + 1;
+---
+
+<TextHighlight>
+  <span id="years-experience" data-start-year={startYear}
+    >{yearsOfExperience}</span
+  > years
+</TextHighlight>
+
+<script>
+  const element = document.getElementById("years-experience");
+  if (element && element.dataset.startYear) {
+    const startYear = parseInt(element.dataset.startYear);
+    const currentYear = new Date().getFullYear();
+    const yearsOfExperience = currentYear - startYear + 1;
+    element.textContent = `${yearsOfExperience} years`;
+  }
+</script>
