@@ -1,38 +1,39 @@
 <template>
   <div
-    class="timeline-card relative bg-bg-tertiary border border-border-muted rounded-[20px] p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] [transform-style:preserve-3d] origin-center will-change-transform shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:bg-bg-subtle hover:border-border-strong hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] group"
+    class="timeline-card relative bg-bg-tertiary/80 backdrop-blur-sm border border-border-muted rounded-[20px] p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] [transform-style:preserve-3d] origin-center will-change-transform shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:bg-bg-subtle/85 hover:border-border-strong hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] group"
     :class="{
       'card-left': isLeft,
       'card-right': !isLeft,
-      'card-active bg-bg-subtle border-border-strong/75 shadow-[0_30px_60px_rgba(0,0,0,0.8)]':
+      'card-active bg-bg-subtle/90 border-border-strong/75 shadow-[0_30px_60px_rgba(0,0,0,0.8)]':
         isActive,
     }"
     @mouseenter="tiltHandlers.handleMouseEnter"
     @mouseleave="tiltHandlers.handleMouseLeave"
     @mousemove="tiltHandlers.handleMouseMove"
   >
-    <!-- Card Content -->
-    <div class="relative z-[1]">
-      <!-- Company Logo (if provided) -->
-      <CompanyLogo :src="experience.companyLogo" :alt="experience.company" />
+    <div class="relative z-1">
+      <CompanyLogo
+        v-if="experience.companyLogo"
+        :src="experience.companyLogo"
+        :alt="experience.company"
+      />
 
-      <!-- Single Role Experience -->
       <SingleRoleExperience
         v-if="!hasMultipleRoles && !isGroupedExperience(experience)"
         :experience="experience"
       />
 
-      <!-- Multiple Roles (Merged Experience) -->
       <MultiRoleExperience
         v-if="hasMultipleRoles && isGroupedExperience(experience)"
         :experience="experience"
       />
 
-      <!-- Project Links (if any) -->
-      <ProjectLinks :projects="experience.projectUrls" />
+      <ProjectLinks
+        v-if="experience.projectUrls"
+        :projects="experience.projectUrls"
+      />
     </div>
 
-    <!-- Duration Badge (absolute position at top right) -->
     <DurationBadge :duration="getDuration()" />
   </div>
 </template>
@@ -65,9 +66,6 @@ const hasMultipleRoles = computed(() => isGroupedExperience(props.experience));
 // Create tilt animation handlers
 const tiltHandlers = createTiltHandler();
 
-/**
- * Calculate duration for the experience
- */
 const getDuration = (): string => {
   if (isGroupedExperience(props.experience)) {
     return calculateCompanyDuration();
@@ -99,7 +97,7 @@ const calculateCompanyDuration = (): string => {
     if (current === null) return null; // If any role is current, company is current
     if (latest === null) return current;
     return current > latest ? current : latest;
-  }, endDates[0]);
+  }, endDates[0]!);
 
   return calculateDurationBetween(earliestStart, latestEnd);
 };

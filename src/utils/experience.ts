@@ -1,4 +1,4 @@
-import type { Experience, GroupedExperience } from "@/data/experience";
+import type { Experience, GroupedExperience } from "@/types/experience";
 
 export type DisplayExperience = Experience | GroupedExperience;
 

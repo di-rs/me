@@ -1,6 +1,6 @@
 ---
-import MetallicBorder from "../components/MetallicBorder.vue";
-import { baseData, social } from "../data/siteData";
+import MetallicBorder from "../components/ui/MetallicBorder.vue";
+import { baseData, social } from "../content/siteData";
 
 const iconPaths = {
   github:
@@ -17,7 +17,9 @@ const iconPaths = {
   <div class="px-6 md:px-24 max-w-7xl mx-auto">
     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
       <div class="text-xs text-text-muted opacity-60">
-        &copy; {new Date().getFullYear()}
+        &copy; <span id="copyright-year"
+          >{new Date().getFullYear().toString()}</span
+        >
         {baseData.author}
       </div>
 
@@ -80,3 +82,10 @@ const iconPaths = {
     </div>
   </div>
 </footer>
+
+<script is:inline>
+  const copyrightYear = document.getElementById("copyright-year");
+  if (copyrightYear) {
+    copyrightYear.textContent = new Date().getFullYear().toString();
+  }
+</script>

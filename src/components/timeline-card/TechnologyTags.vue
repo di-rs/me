@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap gap-2 mb-4 stagger-item">
+  <div class="flex flex-wrap gap-2 stagger-item">
     <span
       v-for="tech in technologies"
       :key="tech"

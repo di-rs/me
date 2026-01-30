@@ -15,6 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
   delay: 2,
   blur: "20px",
   yOffset: 20,
+  class: "",
 });
 
 const container = ref(null);

@@ -12,7 +12,7 @@
       <span class="text-text-primary text-base sm:text-lg font-semibold">{{
         experience.company
       }}</span>
-      <span class="text-text-secondary text-xs sm:text-sm">{{
+      <span class="text-text-subtle text-xs sm:text-sm">{{
         experience.location
       }}</span>
     </div>
@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Experience } from "@/data/experience";
+import type { Experience } from "@/types/experience";
 import { formatDateRange } from "@/utils/date";
 import RoleHeader from "./RoleHeader.vue";
 import DescriptionList from "./DescriptionList.vue";

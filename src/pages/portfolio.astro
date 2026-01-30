@@ -2,15 +2,14 @@
 import Layout from "@/layouts/Layout.astro";
 import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
 import { getCollection } from "astro:content";
-import type { Experience } from "@/data/experience";
+import type { Experience } from "@/types/experience";
 import { groupExperiencesByCompany } from "@/utils/experience";
 
 const experienceEntries = await getCollection("experiences");
 
-// Convert entries to Experience objects
 const allExperiences: Experience[] = experienceEntries
-  .sort((a: any, b: any) => a.data.order - b.data.order)
-  .map((entry: any) => ({
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({
     id: entry.id,
     ...entry.data,
     description:
@@ -21,7 +20,6 @@ const allExperiences: Experience[] = experienceEntries
         .map((line: string) => line.trim().substring(1).trim()) || "",
   }));
 
-// Group experiences by company
 const experiences = groupExperiencesByCompany(allExperiences);
 ---
 
@@ -29,24 +27,46 @@ const experiences = groupExperiencesByCompany(allExperiences);
   title="Dima Portfolio | Experience"
   description="Explore my professional journey, work experience, and achievements in software engineering and web development."
 >
-  <div class="relative w-full p-0 bg-bg-primary min-h-screen">
-    <!-- Section Header -->
-    <div class="text-center mb-6 px-8">
-      <h2
-        class="text-3xl md:text-4xl font-extrabold text-text-primary mb-1 tracking-tight"
-      >
-        Experience
-      </h2>
-      <p class="text-[0.9375rem] text-text-secondary font-normal">
-        My professional journey
-      </p>
-    </div>
+  <div id="smooth-wrapper" class="relative w-full pt-2 min-h-screen">
+    <div id="smooth-content" class="relative">
+      <div class="text-center mb-6 px-8">
+        <h2
+          class="text-3xl md:text-4xl font-extrabold text-text-primary mb-1 tracking-tight"
+        >
+          Experience
+        </h2>
+        <p class="text-[0.9375rem] text-text-secondary font-normal">
+          My professional journey
+        </p>
+      </div>
 
-    <!-- Timeline Container -->
-    <div
-      class="relative max-w-[1200px] mx-auto px-8 md:px-16 pt-2 min-h-screen"
-    >
-      <ExperienceTimeline client:only="vue" experiences={experiences} />
+      <div
+        class="relative max-w-[1200px] mx-auto px-8 md:px-16 pt-2 min-h-screen"
+      >
+        <ExperienceTimeline client:only="vue" experiences={experiences} />
+      </div>
     </div>
   </div>
 </Layout>
+
+<script>
+  import Lenis from "lenis";
+
+  const lenis = new Lenis({
+    duration: 0.8,
+    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: "vertical",
+    gestureOrientation: "vertical",
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 2,
+    infinite: false,
+  });
+
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+</script>
