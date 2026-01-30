@@ -11,35 +11,29 @@
     @mouseleave="tiltHandlers.handleMouseLeave"
     @mousemove="tiltHandlers.handleMouseMove"
   >
-    <!-- Card Content -->
-    <div class="relative z-[1]">
-      <!-- Company Logo (if provided) -->
+    <div class="relative z-1">
       <CompanyLogo
         v-if="experience.companyLogo"
         :src="experience.companyLogo"
         :alt="experience.company"
       />
 
-      <!-- Single Role Experience -->
       <SingleRoleExperience
         v-if="!hasMultipleRoles && !isGroupedExperience(experience)"
         :experience="experience"
       />
 
-      <!-- Multiple Roles (Merged Experience) -->
       <MultiRoleExperience
         v-if="hasMultipleRoles && isGroupedExperience(experience)"
         :experience="experience"
       />
 
-      <!-- Project Links (if any) -->
       <ProjectLinks
         v-if="experience.projectUrls"
         :projects="experience.projectUrls"
       />
     </div>
 
-    <!-- Duration Badge (absolute position at top right) -->
     <DurationBadge :duration="getDuration()" />
   </div>
 </template>
@@ -72,9 +66,6 @@ const hasMultipleRoles = computed(() => isGroupedExperience(props.experience));
 // Create tilt animation handlers
 const tiltHandlers = createTiltHandler();
 
-/**
- * Calculate duration for the experience
- */
 const getDuration = (): string => {
   if (isGroupedExperience(props.experience)) {
     return calculateCompanyDuration();
