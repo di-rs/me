@@ -5,6 +5,7 @@ location: "Rotterdam, South Holland, Netherlands"
 startDate: "2022-02"
 endDate: "2023-02"
 employmentType: "Remote"
+aiSummary: ""
 technologies:
   - "TypeScript"
   - "Redux"

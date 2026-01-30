@@ -3,67 +3,37 @@ import Layout from "@/layouts/Layout.astro";
 import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
 import { getCollection } from "astro:content";
 import type { Experience } from "@/types/experience";
-import {
-  groupExperiencesByCompany,
-  isGroupedExperience,
-} from "@/utils/experience";
-import {
-  generateExperienceSummary,
-  generateGroupedExperienceSummary,
-} from "@/utils/ai-summarizer";
+import { groupExperiencesByCompany } from "@/utils/experience";
 
 const experienceEntries = await getCollection("experiences");
 
-const allExperiences: Experience[] = await Promise.all(
-  experienceEntries
-    .sort((a, b) => {
-      // Sort by startDate (most recent first)
-      const dateComparison = b.data.startDate.localeCompare(a.data.startDate);
-      // If start dates are the same, use order field
-      if (dateComparison === 0) {
-        return (a.data.order || 0) - (b.data.order || 0);
-      }
-      return dateComparison;
-    })
-    .map(async (entry) => {
-      const description =
-        entry.body
-          ?.trim()
-          .split("\n")
-          .filter((line: string) => line.trim().startsWith("-"))
-          .map((line: string) => line.trim().substring(1).trim()) || [];
-
-      // Generate AI summary for this experience
-      const aiSummary = await generateExperienceSummary(
-        description,
-        entry.data.role,
-        entry.data.company,
-      );
-
-      return {
-        id: entry.id,
-        ...entry.data,
-        description,
-        aiSummary,
-      };
-    }),
-);
-
-const groupedExperiences = groupExperiencesByCompany(allExperiences);
-
-// Generate AI summaries for grouped experiences
-const experiences = await Promise.all(
-  groupedExperiences.map(async (exp) => {
-    if (isGroupedExperience(exp)) {
-      const aiSummary = await generateGroupedExperienceSummary(
-        exp.roles.map((r) => ({ role: r.role, description: r.description })),
-        exp.company,
-      );
-      return { ...exp, aiSummary };
+const allExperiences: Experience[] = experienceEntries
+  .sort((a, b) => {
+    // Sort by startDate (most recent first)
+    const dateComparison = b.data.startDate.localeCompare(a.data.startDate);
+    // If start dates are the same, use order field
+    if (dateComparison === 0) {
+      return (a.data.order || 0) - (b.data.order || 0);
     }
-    return exp;
-  }),
-);
+    return dateComparison;
+  })
+  .map((entry) => {
+    const description =
+      entry.body
+        ?.trim()
+        .split("\n")
+        .filter((line: string) => line.trim().startsWith("-"))
+        .map((line: string) => line.trim().substring(1).trim()) || [];
+
+    return {
+      id: entry.id,
+      ...entry.data,
+      description,
+      aiSummary: entry.data.aiSummary,
+    };
+  });
+
+const experiences = groupExperiencesByCompany(allExperiences);
 ---
 
 <Layout

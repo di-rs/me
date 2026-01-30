@@ -5,6 +5,7 @@ location: "San Francisco Bay Area"
 startDate: "2020-07"
 endDate: "2021-06"
 employmentType: "Remote"
+aiSummary: "Built core architecture and UI kit for no-code platform using Vue 3, establishing foundation for all major modules."
 technologies:
   - "Vue 2/3"
   - "Nuxt"

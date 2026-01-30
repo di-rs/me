@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="summary"
-    class="ai-summary relative px-4 py-3 w-full max-w-[280px]"
-  >
+  <div class="ai-summary relative px-4 py-3 w-full max-w-[280px]">
     <!-- AI Badge -->
     <div class="flex items-center gap-1.5 mb-2 h-[20px]">
       <svg
@@ -42,7 +39,7 @@
 import EncryptedText from "@/components/ui/EncryptedText.vue";
 
 interface Props {
-  summary?: string;
+  summary: string;
 }
 
 defineProps<Props>();

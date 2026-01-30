@@ -5,6 +5,7 @@ location: "Kazakhstan"
 startDate: "2019-01"
 endDate: "2019-12"
 employmentType: "Full-time"
+aiSummary: ""
 technologies:
   - "Node.js"
   - "Redux"
