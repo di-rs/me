@@ -13,6 +13,7 @@ technologies:
   - "Next.js"
   - "UI Kit"
   - "Microfrontends"
+  - "React Query"
 technologiesHidden:
   - "Zustand"
   - "Styled-components"

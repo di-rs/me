@@ -1,7 +1,7 @@
 import { StyleSheet } from "@react-pdf/renderer";
 
 export const colors = {
-  sidebarBg: "#3d5a80", // Lighter gray-blue
+  sidebarBg: "#2c4563", // Darker gray-blue
   sidebarText: "#FFFFFF",
   contentBg: "#FFFFFF",
   contentText: "#000000",

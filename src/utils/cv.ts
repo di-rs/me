@@ -1,4 +1,4 @@
-import type { Experience, GroupedExperience } from "@/types/experience";
+import type { Experience } from "@/types/experience";
 import type { CollectionEntry } from "astro:content";
 import { formatDateRange, calculateDurationBetween } from "./date";
 
@@ -19,19 +19,6 @@ export function parseAboutContent(markdown: string): string[] {
   return lines
     .map((line) => line.replace(/^[-*]\s*/, "").trim())
     .filter(Boolean);
-}
-
-/**
- * Filters out hidden technologies from tech stack
- */
-export function getVisibleTechnologies(
-  technologies: string[],
-  technologiesHidden?: string[],
-): string[] {
-  if (!technologiesHidden || technologiesHidden.length === 0) {
-    return technologies;
-  }
-  return technologies.filter((tech) => !technologiesHidden.includes(tech));
 }
 
 /**

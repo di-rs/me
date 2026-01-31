@@ -6,6 +6,9 @@ const props = withDefaults(defineProps<Props>(), {
   revealDelayMs: 50,
   charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@",
   flipDelayMs: 50,
+  class: undefined,
+  encryptedClass: undefined,
+  revealedClass: undefined,
 });
 
 interface Props {

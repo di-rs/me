@@ -12,6 +12,7 @@ technologies:
   - "AI"
   - "Bun"
   - "Nitro"
+  - "React Query"
   - "Vibe coding"
 technologiesHidden:
   - "Tailwind"

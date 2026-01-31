@@ -12,5 +12,6 @@ technologies:
   - "Redux"
   - "Microfrontends"
   - "Node.js"
+  - "React Query"
 order: 4
 ---

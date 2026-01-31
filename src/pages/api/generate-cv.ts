@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
-import { renderToBuffer } from "@react-pdf/renderer";
+import { renderToBuffer, type DocumentProps } from "@react-pdf/renderer";
 import React from "react";
 import { CVDocument } from "../../components/cv/CVDocument";
 import type { CVData } from "../../components/cv/CVDocument";
@@ -52,14 +52,26 @@ export const GET: APIRoute = async () => {
 
     // Sort education by start date descending
     const sortedEducation = educationEntries
-      .map((edu) => ({
-        institution: edu.data.institution,
-        degree: edu.data.degree,
-        field: edu.data.field,
-        location: edu.data.location,
-        startDate: edu.data.startDate,
-        endDate: edu.data.endDate,
-      }))
+      .map((edu) => {
+        const entry: {
+          institution: string;
+          degree: string;
+          field?: string;
+          location?: string;
+          startDate: string;
+          endDate: string | null;
+        } = {
+          institution: edu.data.institution,
+          degree: edu.data.degree,
+          startDate: edu.data.startDate,
+          endDate: edu.data.endDate,
+          ...(edu.data.field !== undefined && { field: edu.data.field }),
+          ...(edu.data.location !== undefined && {
+            location: edu.data.location,
+          }),
+        };
+        return entry;
+      })
       .sort((a, b) => {
         return b.startDate.localeCompare(a.startDate);
       });
@@ -83,14 +95,16 @@ export const GET: APIRoute = async () => {
 
     // Generate PDF
     const pdfBuffer = await renderToBuffer(
-      React.createElement(CVDocument, { data: cvDataObject }),
+      React.createElement(CVDocument, {
+        data: cvDataObject,
+      }) as React.ReactElement<DocumentProps>,
     );
 
     // Convert Buffer to ArrayBuffer if needed
     const arrayBuffer = pdfBuffer.buffer.slice(
       pdfBuffer.byteOffset,
       pdfBuffer.byteOffset + pdfBuffer.byteLength,
-    );
+    ) as ArrayBuffer;
 
     return new Response(arrayBuffer, {
       status: 200,

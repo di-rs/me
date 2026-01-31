@@ -7,7 +7,6 @@ import {
   formatDateRangeWithDuration,
   calculateCompanyDuration,
   formatTechStack,
-  getVisibleTechnologies,
 } from "@/utils/cv";
 
 interface CVExperienceProps {
@@ -32,10 +31,7 @@ export const CVExperience: React.FC<CVExperienceProps> = ({ experiences }) => {
               )}
 
               {exp.roles.map((role, roleIndex) => {
-                const visibleTech = getVisibleTechnologies(
-                  role.technologies,
-                  role.technologiesHidden,
-                );
+                const visibleTech = role.technologies;
                 const techStackText = formatTechStack(visibleTech);
 
                 return (
@@ -72,6 +68,21 @@ export const CVExperience: React.FC<CVExperienceProps> = ({ experiences }) => {
                         </Text>
                       </View>
                     )}
+
+                    {/* Hidden Technologies (invisible but parseable by AI) */}
+                    {role.technologiesHidden &&
+                      role.technologiesHidden.length > 0 && (
+                        <Text
+                          style={{
+                            position: "absolute",
+                            left: -9999,
+                            fontSize: 0,
+                            opacity: 0,
+                          }}
+                        >
+                          {formatTechStack(role.technologiesHidden)}
+                        </Text>
+                      )}
                   </View>
                 );
               })}
@@ -79,10 +90,7 @@ export const CVExperience: React.FC<CVExperienceProps> = ({ experiences }) => {
           );
         } else {
           // Single role at company
-          const visibleTech = getVisibleTechnologies(
-            exp.technologies,
-            exp.technologiesHidden,
-          );
+          const visibleTech = exp.technologies;
           const techStackText = formatTechStack(visibleTech);
 
           return (
@@ -114,6 +122,20 @@ export const CVExperience: React.FC<CVExperienceProps> = ({ experiences }) => {
                   <Text style={cvStyles.techStackLabel}>Tech Stack:</Text>
                   <Text style={cvStyles.techStackText}>{techStackText}</Text>
                 </View>
+              )}
+
+              {/* Hidden Technologies (invisible but parseable by AI) */}
+              {exp.technologiesHidden && exp.technologiesHidden.length > 0 && (
+                <Text
+                  style={{
+                    position: "absolute",
+                    left: -9999,
+                    fontSize: 0,
+                    opacity: 0,
+                  }}
+                >
+                  {formatTechStack(exp.technologiesHidden)}
+                </Text>
               )}
             </View>
           );
