@@ -6,10 +6,10 @@ import { techShowcase } from "../content/siteData";
 const { title, startYear, titleSuffix, subtitle, techStacks } = techShowcase;
 ---
 
-<div
-  class="tech-showcase relative min-h-screen flex items-center justify-center px-3 py-40 pb-16 md:px-6 md:py-40 md:pb-16 opacity-0 translate-y-10"
+<section
+  class="tech-showcase relative min-h-screen flex items-center justify-center py-40 pb-16 md:py-40 md:pb-16 opacity-0 translate-y-10 px-6 md:px-12"
 >
-  <div class="w-full container mx-auto text-center px-6 md:px-9">
+  <div class="w-full container mx-auto text-center px-8">
     <h2
       class="text-[2rem] md:text-5xl lg:text-[3.5rem] font-bold text-text-primary mb-6 leading-[1.3]"
     >
@@ -29,7 +29,7 @@ const { title, startYear, titleSuffix, subtitle, techStacks } = techShowcase;
       {techStacks.map((tech) => <TechCard technologies={tech.technologies} />)}
     </div>
   </div>
-</div>
+</section>
 
 <style>
   @keyframes fadeInUp {
