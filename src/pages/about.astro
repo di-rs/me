@@ -11,26 +11,60 @@ const { Content } = await aboutEntry.render();
   title="Dima Portfolio | About"
   description="Learn more about my skills, expertise, and professional background in software engineering and web development."
 >
-  <section class="relative w-full mb-16">
-    <div class="max-w-[1200px] mx-auto px-8 md:px-16">
-      <div class="p-6 md:p-8 backdrop-blur-sm">
-        <div class="about-content">
-          <Content />
-        </div>
+  <section class="relative w-full flex-1 container mx-auto flex">
+    <div
+      class="max-w-[1200px] flex-1 mx-auto px-8 md:px-16 w-full flex items-center"
+    >
+      <div class="about-content fade-in-up">
+        <Content />
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  /* Custom list styling to match the site aesthetic */
+  /* Fade in up animation */
+  .fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Headings with staggered animation */
+  .about-content :global(h1),
+  .about-content :global(h2),
+  .about-content :global(h3) {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.1s;
+  }
+
+  /* Paragraphs with delayed animation */
+  .about-content :global(p) {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.2s;
+    line-height: 1.8;
+  }
+
+  /* Custom list styling with staggered animations */
   .about-content :global(ul) {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 32px
+    gap: 32px;
   }
 
   .about-content :global(li) {
@@ -38,6 +72,57 @@ const { Content } = await aboutEntry.render();
     padding-left: 1.25rem;
     font-size: 20px;
     line-height: 1.6;
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+    transition:
+      transform 0.3s ease,
+      color 0.3s ease,
+      filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+  }
+
+  /* Staggered delay for list items */
+  .about-content :global(li:nth-child(1)) {
+    animation-delay: 0.3s;
+  }
+  .about-content :global(li:nth-child(2)) {
+    animation-delay: 0.4s;
+  }
+  .about-content :global(li:nth-child(3)) {
+    animation-delay: 0.5s;
+  }
+  .about-content :global(li:nth-child(4)) {
+    animation-delay: 0.6s;
+  }
+  .about-content :global(li:nth-child(5)) {
+    animation-delay: 0.7s;
+  }
+  .about-content :global(li:nth-child(6)) {
+    animation-delay: 0.8s;
+  }
+  .about-content :global(li:nth-child(7)) {
+    animation-delay: 0.9s;
+  }
+  .about-content :global(li:nth-child(8)) {
+    animation-delay: 1s;
+  }
+
+  /* Apply blur effect only on devices with hover capability */
+  @media (hover: hover) and (pointer: fine) {
+    .about-content :global(li) {
+      filter: blur(2px);
+    }
+
+    .about-content :global(li:hover) {
+      transform: translateX(4px);
+      color: rgba(255, 255, 255, 0.95);
+      filter: blur(0px);
+    }
+
+    .about-content :global(li:hover::before) {
+      color: rgba(255, 255, 255, 0.6);
+      transform: scale(1.3);
+    }
   }
 
   .about-content :global(li::before) {
@@ -46,5 +131,37 @@ const { Content } = await aboutEntry.render();
     left: 0;
     color: var(--color-text-muted);
     font-weight: normal;
+    transition: all 0.3s ease;
+  }
+
+  /* Links with subtle animation */
+  .about-content :global(a) {
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .about-content :global(a::after) {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s ease;
+  }
+
+  .about-content :global(a:hover::after) {
+    width: 100%;
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in-up,
+    .about-content :global(*) {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+    }
   }
 </style>

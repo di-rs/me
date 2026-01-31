@@ -46,7 +46,7 @@ export function groupExperiencesByCompany(
       id: `${company.toLowerCase().replace(/\s+/g, "-")}-grouped`,
       company,
       roles: sortedRoles,
-      aiSummary: firstExp.aiSummary ?? exps[1]?.aiSummary
+      aiSummary: firstExp.aiSummary ?? exps[1]?.aiSummary,
     };
 
     result.push(grouped);

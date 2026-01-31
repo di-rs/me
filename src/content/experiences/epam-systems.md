@@ -11,6 +11,7 @@ technologies:
   - "TypeScript"
   - "Redux"
   - "React"
+  - "React Query"
   - "Microfrontends"
 technologiesHidden:
   - "Monorepos"

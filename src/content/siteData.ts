@@ -18,7 +18,7 @@ export const hero = {
 export const social = {
   github: "https://github.com/di-rs",
   linkedin: "https://linkedin.com/in/popov-dmitriy",
-  email: "mailto:ai@dimaportish.com",
+  email: "mailto:popov.dmitriiy@gmail.com",
 };
 
 export const techShowcase = {
@@ -64,5 +64,16 @@ export const techShowcase = {
         "Monorepos",
       ],
     },
+  ],
+};
+
+export const cvData = {
+  name: "Dmitriy Popov",
+  summaryIntro:
+    "Senior Software Engineer with 8 years of experience and high proficiency in AI, Web and modern Frontend stack",
+  topSkills: ["Front-end Development", "React.js", "TypeScript"],
+  languages: [
+    { name: "English", level: "Professional Working" },
+    { name: "Russian", level: "Native or Bilingual" },
   ],
 };

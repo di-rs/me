@@ -12,6 +12,8 @@ technologies:
   - "React"
   - "UI kit"
   - "AI"
+  - "React Query"
+  - "Zustand"
 technologiesHidden:
   - "Next.js"
   - "Zustand"
