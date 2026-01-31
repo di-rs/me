@@ -1,7 +1,14 @@
 {
-  "name": "mod-6",
+  "name": "me",
   "type": "module",
   "version": "0.0.1",
+  "description": "Minimal, modern portfolio website with a greyish aesthetic and subtle animations",
+  "author": "Dima",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/di-rs/me.git"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
