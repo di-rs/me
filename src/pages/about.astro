@@ -12,7 +12,9 @@ const { Content } = await aboutEntry.render();
   description="Learn more about my skills, expertise, and professional background in software engineering and web development."
 >
   <section class="relative w-full flex-1 container mx-auto flex">
-    <div class="max-w-[1200px] flex-1 mx-auto px-8 md:px-16 w-full flex items-center">
+    <div
+      class="max-w-[1200px] flex-1 mx-auto px-8 md:px-16 w-full flex items-center"
+    >
       <div class="about-content fade-in-up">
         <Content />
       </div>
@@ -72,19 +74,38 @@ const { Content } = await aboutEntry.render();
     line-height: 1.6;
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     opacity: 0;
-    transition: transform 0.3s ease, color 0.3s ease, filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      transform 0.3s ease,
+      color 0.3s ease,
+      filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
   }
 
   /* Staggered delay for list items */
-  .about-content :global(li:nth-child(1)) { animation-delay: 0.3s; }
-  .about-content :global(li:nth-child(2)) { animation-delay: 0.4s; }
-  .about-content :global(li:nth-child(3)) { animation-delay: 0.5s; }
-  .about-content :global(li:nth-child(4)) { animation-delay: 0.6s; }
-  .about-content :global(li:nth-child(5)) { animation-delay: 0.7s; }
-  .about-content :global(li:nth-child(6)) { animation-delay: 0.8s; }
-  .about-content :global(li:nth-child(7)) { animation-delay: 0.9s; }
-  .about-content :global(li:nth-child(8)) { animation-delay: 1.0s; }
+  .about-content :global(li:nth-child(1)) {
+    animation-delay: 0.3s;
+  }
+  .about-content :global(li:nth-child(2)) {
+    animation-delay: 0.4s;
+  }
+  .about-content :global(li:nth-child(3)) {
+    animation-delay: 0.5s;
+  }
+  .about-content :global(li:nth-child(4)) {
+    animation-delay: 0.6s;
+  }
+  .about-content :global(li:nth-child(5)) {
+    animation-delay: 0.7s;
+  }
+  .about-content :global(li:nth-child(6)) {
+    animation-delay: 0.8s;
+  }
+  .about-content :global(li:nth-child(7)) {
+    animation-delay: 0.9s;
+  }
+  .about-content :global(li:nth-child(8)) {
+    animation-delay: 1s;
+  }
 
   /* Apply blur effect only on devices with hover capability */
   @media (hover: hover) and (pointer: fine) {
@@ -120,7 +141,7 @@ const { Content } = await aboutEntry.render();
   }
 
   .about-content :global(a::after) {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -2px;
     left: 0;

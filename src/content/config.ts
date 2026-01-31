@@ -34,4 +34,18 @@ const about = defineCollection({
   }),
 });
 
-export const collections = { experiences, about };
+const education = defineCollection({
+  type: "content",
+  schema: z.object({
+    institution: z.string(),
+    degree: z.string(),
+    field: z.string().optional(),
+    location: z.string().optional(),
+    startDate: z.string(), // YYYY-MM format
+    endDate: z.string().nullable(),
+    description: z.string().optional(),
+    order: z.number().optional(),
+  }),
+});
+
+export const collections = { experiences, about, education };
