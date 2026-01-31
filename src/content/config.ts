@@ -12,6 +12,7 @@ const experiences = defineCollection({
     technologiesHidden: z.array(z.string()).optional(),
     companyLogo: z.string().optional(),
     companyUrl: z.string().optional(),
+    linkedinUrl: z.string().optional(),
     projectUrls: z
       .array(
         z.object({

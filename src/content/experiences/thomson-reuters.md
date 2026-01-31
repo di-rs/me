@@ -5,6 +5,7 @@ location: "Canada"
 startDate: "2021-06"
 endDate: "2022-02"
 employmentType: "Remote"
+linkedinUrl: "https://www.linkedin.com/company/thomson-reuters/"
 aiSummary: ""
 technologies:
   - "TypeScript"

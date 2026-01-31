@@ -5,6 +5,7 @@ location: "Rotterdam, South Holland, Netherlands"
 startDate: "2022-02"
 endDate: "2023-02"
 employmentType: "Remote"
+linkedinUrl: "https://www.linkedin.com/company/c-teleport/"
 aiSummary: ""
 technologies:
   - "TypeScript"

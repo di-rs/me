@@ -4,6 +4,7 @@
     <CompanyHeader
       :company="experience.company"
       :location="experience.location"
+      :linkedin-url="experience.linkedinUrl"
     />
 
     <!-- Multiple Roles -->

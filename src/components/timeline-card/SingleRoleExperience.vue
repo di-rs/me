@@ -9,9 +9,18 @@
 
     <!-- Company & Location -->
     <div class="flex flex-col gap-1 mb-5 stagger-item">
-      <span class="text-text-primary text-base sm:text-lg font-semibold">{{
-        experience.company
-      }}</span>
+      <span class="text-text-primary text-base sm:text-lg font-semibold">
+        <a
+          v-if="experience.linkedinUrl"
+          :href="experience.linkedinUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:opacity-70 transition-opacity"
+        >
+          {{ experience.company }}
+        </a>
+        <span v-else>{{ experience.company }}</span>
+      </span>
       <span class="text-text-subtle text-xs sm:text-sm">{{
         experience.location
       }}</span>

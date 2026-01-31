@@ -5,6 +5,7 @@ location: "Kazakhstan"
 startDate: "2019-12"
 endDate: "2020-07"
 employmentType: "Full-time"
+linkedinUrl: "https://www.linkedin.com/company/bilim-group-com"
 aiSummary: "Progressed from Full-stack Developer to Lead Frontend, managing team of 4 while building high-load educational platform serving 10M users with genetic scheduling algorithms."
 technologies:
   - "React"

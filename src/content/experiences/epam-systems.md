@@ -5,6 +5,7 @@ location: "Canada"
 startDate: "2021-06"
 endDate: "2022-02"
 employmentType: "Hybrid"
+linkedinUrl: "https://www.linkedin.com/company/epam-systems/"
 aiSummary: "Contracted to Thomson Reuters through EPAM, building microfrontend architecture while mentoring junior developers in React and TypeScript."
 technologies:
   - "Node.js"

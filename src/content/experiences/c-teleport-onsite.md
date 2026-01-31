@@ -5,6 +5,7 @@ location: "Rotterdam, South Holland, Netherlands"
 startDate: "2023-02"
 endDate: "2025-10"
 employmentType: "On-site"
+linkedinUrl: "https://www.linkedin.com/company/c-teleport/"
 aiSummary: "Core UI Kit maintainer transitioning from remote to on-site, architecting microfrontends and design systems while adopting modern technologies like Bun and AI integrations."
 technologies:
   - "TypeScript"
