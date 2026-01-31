@@ -9,7 +9,9 @@
     "lint": "astro check && tsc --noEmit && eslint .",
     "fmt": "bun --bun prettier --write . --cache --log-level error",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "astro build && wrangler pages deploy dist",
+    "pages:dev": "wrangler pages dev dist"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",
