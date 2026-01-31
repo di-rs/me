@@ -14,7 +14,6 @@
     "pages:dev": "wrangler pages dev dist"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/netlify": "^6.6.4",
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/vue": "^5.1.4",

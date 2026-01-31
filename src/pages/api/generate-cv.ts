@@ -115,7 +115,7 @@ export const GET: APIRoute = async () => {
     });
   } catch (error) {
     console.error("Error generating CV:", error);
-    return new Response(JSON.stringify({ error: "Failed to generate CV" }), {
+    return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: {
         "Content-Type": "application/json",
