@@ -11,9 +11,9 @@ const { variant = "primary", download = false } = defineProps<Props>();
 
 const buttonClasses = computed(() => {
   if (variant === "primary") {
-    return "text-foreground shadow-lg shadow-text-primary/20 hover:shadow-xl hover:shadow-text-primary/30 hover:scale-[1.02]";
+    return "text-foreground shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02]";
   }
-  return "border border-muted-foreground/20 text-accent-foreground/80 hover:border-text-muted hover:text-primary hover:bg-secondary backdrop-blur-sm";
+  return "border border-muted-foreground/20 text-accent-foreground/80 hover:text-muted hover:text-primary hover:bg-secondary backdrop-blur-sm";
 });
 </script>
 
@@ -30,7 +30,7 @@ const buttonClasses = computed(() => {
     <!-- Animated background gradient -->
     <div
       v-if="variant === 'primary'"
-      class="absolute inset-0 bg-linear-to-r from-text-primary/30 via-text-secondary to-text-primary bg-[length:200%_100%] transition-all duration-500 group-hover:bg-[length:100%_100%]"
+      class="absolute inset-0 bg-linear-to-r from-primary/30 via-secondary-foreground/80 to-primary bg-size-[200%_100%] transition-all duration-500 group-hover:bg-size-[100%_100%]"
       style="animation: gradient-shift 3s ease infinite"
     />
 
@@ -43,7 +43,7 @@ const buttonClasses = computed(() => {
     <!-- Border shimmer for secondary -->
     <div
       v-if="variant === 'secondary'"
-      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-r from-transparent via-text-secondary/15 to-transparent animate-[shimmer-slide_3s_ease-in-out_infinite]"
+      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-linear-to-r from-transparent via-secondary/15 to-transparent animate-[shimmer-slide_3s_ease-in-out_infinite]"
     />
 
     <span class="relative z-10 flex items-center gap-2">
