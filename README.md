@@ -26,14 +26,3 @@ bun build
 # Preview production build
 bun preview
 ```
-
-## Color Palette
-
-Custom CSS variables for the minimal greyish theme:
-
-- `--color-bg-primary`: #0a0a0a
-- `--color-bg-secondary`: #141414
-- `--color-bg-tertiary`: #1a1a1a
-- `--color-text-primary`: #e5e5e5
-- `--color-text-secondary`: #a3a3a3
-- `--color-text-muted`: #525252

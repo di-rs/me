@@ -1,7 +1,7 @@
 <template>
   <div class="mb-5 stagger-item">
     <h3
-      class="text-xl sm:text-2xl md:text-xl font-bold text-text-primary mb-2 leading-tight"
+      class="text-xl sm:text-2xl md:text-xl font-bold text-primary mb-2 leading-tight"
     >
       <a
         v-if="linkedinUrl"
@@ -14,7 +14,7 @@
       </a>
       <span v-else>{{ company }}</span>
     </h3>
-    <span class="text-text-secondary text-xs sm:text-sm">{{ location }}</span>
+    <span class="text-muted-foreground/40 text-xs sm:text-sm">{{ location }}</span>
   </div>
 </template>
 

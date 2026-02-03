@@ -9,7 +9,7 @@
 
     <!-- Company & Location -->
     <div class="flex flex-col gap-1 mb-5 stagger-item">
-      <span class="text-text-primary text-base sm:text-lg font-semibold">
+      <span class="text-primary text-base sm:text-lg font-semibold">
         <a
           v-if="experience.linkedinUrl"
           :href="experience.linkedinUrl"
@@ -21,7 +21,7 @@
         </a>
         <span v-else>{{ experience.company }}</span>
       </span>
-      <span class="text-text-subtle text-xs sm:text-sm">{{
+      <span class="text-muted-foreground/40 text-xs sm:text-sm">{{
         experience.location
       }}</span>
     </div>

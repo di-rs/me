@@ -12,10 +12,10 @@ interface Props {
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark" class="lenis lenis-smooth">
+<html lang="en" data-theme="dark" class="lenis lenis-smooth dark">
   <BaseHead {...Astro.props} />
   <body
-    class="bg-bg-primary text-text-primary relative overflow-x-hidden min-h-screen flex flex-col"
+    class="bg-primary-foreground text-primary relative overflow-x-hidden min-h-screen flex flex-col"
   >
     <CanvasBackground client:only="vue" />
     <Nav />

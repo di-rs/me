@@ -2,15 +2,6 @@
 import { Motion, useInView } from "motion-v";
 import { computed, onUnmounted, ref, watch } from "vue";
 
-const props = withDefaults(defineProps<Props>(), {
-  revealDelayMs: 50,
-  charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@",
-  flipDelayMs: 50,
-  class: undefined,
-  encryptedClass: undefined,
-  revealedClass: undefined,
-});
-
 interface Props {
   text: string;
   class?: string;
@@ -21,6 +12,16 @@ interface Props {
   revealedClass?: string;
 }
 
+const {
+  revealDelayMs = 50,
+  charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@",
+  flipDelayMs = 50,
+  text,
+  revealedClass,
+  encryptedClass,
+  ...props
+} = defineProps<Props>();
+
 const containerRef = ref<HTMLElement>();
 const isInView = useInView(containerRef, { once: true });
 
@@ -30,7 +31,7 @@ const startTime = ref<number>(0);
 const lastFlipTime = ref<number>(0);
 const scrambleChars = ref<string[]>([]);
 
-const textArray = computed(() => props.text.split(""));
+const textArray = computed(() => text.split(""));
 
 function generateRandomCharacter(charset: string): string {
   const index = Math.floor(Math.random() * charset.length);
@@ -53,14 +54,14 @@ function generateGibberishPreservingSpaces(
 function getCharClass(index: number): string {
   const isRevealed = index < revealCount.value;
   const baseClass = props.class || "";
-  const stateClass = isRevealed ? props.revealedClass : props.encryptedClass;
+  const stateClass = isRevealed ? revealedClass : encryptedClass;
 
   return [baseClass, stateClass].filter(Boolean).join(" ");
 }
 
 function displayChar(index: number): string {
   const isRevealed = index < revealCount.value;
-  const char = props.text[index];
+  const char = text[index];
 
   if (isRevealed) {
     return char || "";
@@ -70,13 +71,11 @@ function displayChar(index: number): string {
     return " ";
   }
 
-  return scrambleChars.value[index] || generateRandomCharacter(props.charset);
+  return scrambleChars.value[index] || generateRandomCharacter(charset);
 }
 
 function resetAnimation() {
-  const initial = props.text
-    ? generateGibberishPreservingSpaces(props.text, props.charset)
-    : "";
+  const initial = text ? generateGibberishPreservingSpaces(text, charset) : "";
   scrambleChars.value = initial.split("");
   startTime.value = performance.now();
   lastFlipTime.value = startTime.value;
@@ -85,10 +84,10 @@ function resetAnimation() {
 
 function updateAnimation(now: number) {
   const elapsedMs = now - startTime.value;
-  const totalLength = props.text.length;
+  const totalLength = text.length;
   const currentRevealCount = Math.min(
     totalLength,
-    Math.floor(elapsedMs / Math.max(1, props.revealDelayMs)),
+    Math.floor(elapsedMs / Math.max(1, revealDelayMs)),
   );
 
   revealCount.value = currentRevealCount;
@@ -98,12 +97,12 @@ function updateAnimation(now: number) {
   }
 
   const timeSinceLastFlip = now - lastFlipTime.value;
-  if (timeSinceLastFlip >= Math.max(0, props.flipDelayMs)) {
+  if (timeSinceLastFlip >= Math.max(0, flipDelayMs)) {
     const newScrambleChars = [...scrambleChars.value];
     for (let index = 0; index < totalLength; index += 1) {
       if (index >= currentRevealCount) {
-        if (props.text[index] !== " ") {
-          newScrambleChars[index] = generateRandomCharacter(props.charset);
+        if (text[index] !== " ") {
+          newScrambleChars[index] = generateRandomCharacter(charset);
         } else {
           newScrambleChars[index] = " ";
         }
@@ -117,14 +116,14 @@ function updateAnimation(now: number) {
 }
 
 function startAnimation() {
-  if (!props.text) return;
+  if (!text) return;
 
   resetAnimation();
 
   const animate = () => {
     animationFrameId.value = requestAnimationFrame((now) => {
       updateAnimation(now);
-      if (revealCount.value < props.text.length) {
+      if (revealCount.value < text.length) {
         animate();
       }
     });
@@ -152,7 +151,7 @@ watch(isInView, (newVal) => {
 
 // Watch for text changes
 watch(
-  () => props.text,
+  () => text,
   () => {
     if (isInView.value) {
       startAnimation();
@@ -174,7 +173,7 @@ onUnmounted(() => {
     :aria-label="text"
     role="text"
   >
-    <template v-for="(char, index) in textArray" :key="index">
+    <template v-for="(_, index) in textArray" :key="index">
       <span :class="getCharClass(index)">
         {{ displayChar(index) }}
       </span>

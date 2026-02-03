@@ -7,7 +7,7 @@
       class="absolute inset-0 flex items-center justify-center pointer-events-none"
     >
       <h1
-        class="text-[140px] md:text-[280px] font-bold text-text-secondary opacity-30 select-none"
+        class="text-[140px] md:text-[280px] font-bold text-secondary-foreground opacity-30 select-none"
       >
         404
       </h1>
@@ -48,9 +48,9 @@ onMounted(() => {
   );
 
   // Get colors from CSS variables
-  const bgPrimaryColor = getThreeColorFromVar("--color-bg-primary");
-  const textSubtleColor = getThreeColorFromVar("--color-text-subtle");
-  const textMutedColor = getThreeColorFromVar("--color-text-muted");
+  const bgPrimaryColor = getThreeColorFromVar("--color-primary");
+  const textSubtleColor = getThreeColorFromVar("--color-accent");
+  const textMutedColor = getThreeColorFromVar("--color-muted-foreground");
   const gray700Color = getThreeColorFromVar("--color-gray-700");
   const gray800Color = getThreeColorFromVar("--color-gray-800");
 

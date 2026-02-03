@@ -1,3 +1,22 @@
+<script setup lang="ts">
+import { computed } from "vue";
+
+interface Props {
+  variant?: "primary" | "secondary";
+  href?: string | undefined;
+  download?: boolean | string;
+}
+
+const { variant = "primary", download = false } = defineProps<Props>();
+
+const buttonClasses = computed(() => {
+  if (variant === "primary") {
+    return "text-foreground shadow-lg shadow-text-primary/20 hover:shadow-xl hover:shadow-text-primary/30 hover:scale-[1.02]";
+  }
+  return "border border-border-muted text-accent-foreground/80 hover:border-text-muted hover:text-primary hover:bg-secondary backdrop-blur-sm";
+});
+</script>
+
 <template>
   <component
     :is="href ? 'a' : 'button'"
@@ -11,14 +30,14 @@
     <!-- Animated background gradient -->
     <div
       v-if="variant === 'primary'"
-      class="absolute inset-0 bg-linear-to-r from-text-primary via-text-secondary to-text-primary bg-[length:200%_100%] transition-all duration-500 group-hover:bg-[length:100%_100%]"
+      class="absolute inset-0 bg-linear-to-r from-text-primary/30 via-text-secondary to-text-primary bg-[length:200%_100%] transition-all duration-500 group-hover:bg-[length:100%_100%]"
       style="animation: gradient-shift 3s ease infinite"
     />
 
     <!-- Glow effect on hover -->
     <div
       v-if="variant === 'primary'"
-      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-[radial-gradient(circle_at_center,var(--color-text-primary)/30,transparent_70%)]"
+      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-[radial-gradient(circle_at_center,var(--color-primary)/30,transparent_70%)]"
     />
 
     <!-- Border shimmer for secondary -->
@@ -32,29 +51,6 @@
     </span>
   </component>
 </template>
-
-<script setup lang="ts">
-import { computed } from "vue";
-
-interface Props {
-  variant?: "primary" | "secondary";
-  href?: string;
-  download?: boolean | string;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  variant: "primary",
-  download: false,
-  href: undefined,
-});
-
-const buttonClasses = computed(() => {
-  if (props.variant === "primary") {
-    return "text-bg-primary shadow-lg shadow-text-primary/20 hover:shadow-xl hover:shadow-text-primary/30 hover:scale-[1.02]";
-  }
-  return "border border-border-muted text-text-secondary hover:border-text-muted hover:text-text-primary hover:bg-bg-secondary backdrop-blur-sm";
-});
-</script>
 
 <style scoped>
 @keyframes gradient-shift {

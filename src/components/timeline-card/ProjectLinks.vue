@@ -9,7 +9,7 @@
       :href="project.url"
       target="_blank"
       rel="noopener noreferrer"
-      class="text-text-primary text-sm font-medium no-underline transition-colors duration-200 hover:text-text-secondary"
+      class="text-primary text-sm font-medium no-underline transition-colors duration-200 hover:text-secondary"
     >
       {{ project.name }} →
     </a>

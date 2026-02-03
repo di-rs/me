@@ -68,7 +68,7 @@ const triggerWave = () => {
 
     p.setup = () => {
       p.createCanvas(p.windowWidth, p.windowHeight);
-      waveColor = getColorFromVar("--color-text-secondary");
+      waveColor = getColorFromVar("--color-secondary-foreground");
 
       // Create initial wave ring
       waveRings.push({
@@ -125,9 +125,9 @@ onMounted(() => {
       p.createCanvas(canvasSize, canvasSize);
 
       // Get colors from CSS variables
-      centerColor = getColorFromVar("--color-text-primary");
-      particleColor = getColorFromVar("--color-text-secondary");
-      lineColor = getColorFromVar("--color-text-secondary");
+      centerColor = getColorFromVar("--color-primary");
+      particleColor = getColorFromVar("--color-primary");
+      lineColor = getColorFromVar("--color-muted-foreground");
 
       // Create particles orbiting around center
       for (let i = 0; i < 40; i++) {

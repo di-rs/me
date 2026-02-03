@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="src"
-    class="w-16 h-16 mb-4 rounded-xl overflow-hidden bg-bg-primary flex items-center justify-center stagger-item"
+    class="w-16 h-16 mb-4 rounded-xl overflow-hidden bg-primary-foreground flex items-center justify-center stagger-item"
   >
     <img
       :src="src"

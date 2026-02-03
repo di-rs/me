@@ -56,11 +56,7 @@ onUnmounted(() => {
 .animated-text {
   display: inline-block;
   font-weight: 700;
-  background: linear-gradient(
-    135deg,
-    var(--color-text-primary),
-    var(--color-text-secondary)
-  );
+  background: linear-gradient(135deg, var(--color-primary), #a3a3a3);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

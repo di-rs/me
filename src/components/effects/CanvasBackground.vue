@@ -50,8 +50,8 @@ onMounted(() => {
       p.createCanvas(p.windowWidth, p.windowHeight);
 
       // Get colors from CSS variables
-      particleColor = getColorFromVar("--color-text-secondary");
-      lineColor = getColorFromVar("--color-text-secondary");
+      particleColor = getColorFromVar("--color-muted-foreground");
+      lineColor = getColorFromVar("--color-muted-foreground");
 
       // Create minimal particles
       for (let i = 0; i < 40; i++) {

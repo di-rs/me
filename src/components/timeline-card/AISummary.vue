@@ -3,7 +3,7 @@
     <!-- AI Badge -->
     <div class="flex items-center gap-1.5 mb-2 h-[20px]">
       <svg
-        class="w-3.5 h-3.5 text-text-accent shrink-0"
+        class="w-3.5 h-3 text-accent-foreground shrink-0"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -17,7 +17,7 @@
         />
       </svg>
       <span
-        class="text-[10px] font-semibold uppercase tracking-wider text-text-accent"
+        class="text-[10px] font-semibold uppercase tracking-wider text-accent-foreground"
       >
         AI Summary
       </span>
@@ -27,8 +27,8 @@
     <EncryptedText
       :text="summary"
       class="text-xs"
-      encrypted-class="text-text-secondary"
-      revealed-class="text-text-secondary"
+      encrypted-class="text-muted-foreground/90"
+      revealed-class="text-muted-foreground/90"
       :reveal-delay-ms="20"
       :flip-delay-ms="30"
     />
