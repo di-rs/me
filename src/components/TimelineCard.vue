@@ -1,6 +1,6 @@
 <template>
   <div
-    class="timeline-card relative bg-secondary backdrop-blur-sm border border-border-muted rounded-[20px] p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] transform-3d origin-center will-change-transform shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:bg-accent/75 hover:border-border-strong hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] group"
+    class="timeline-card relative bg-secondary backdrop-blur-sm border border-muted-foreground/20 rounded-[20px] p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] transform-3d origin-center will-change-transform shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:bg-accent/75 hover:border-border-strong hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] group"
     :class="{
       'card-left': isLeft,
       'card-right': !isLeft,

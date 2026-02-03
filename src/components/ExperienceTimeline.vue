@@ -3,7 +3,7 @@
     <!-- Subtle Timeline Line -->
     <div
       ref="timelineLineRef"
-      class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 scale-y-0 origin-top z-0 pointer-events-none will-change-transform bg-linear-to-b from-text-secondary/15 via-text-secondary/10 to-text-secondary/5 hidden lg:block"
+      class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 scale-y-0 origin-top z-0 pointer-events-none will-change-transform bg-linear-to-b from-secondary-foreground/15 via-secondary-foreground/10 to-secondary-foreground/5 hidden lg:block"
     />
 
     <!-- Timeline Items -->
@@ -16,7 +16,7 @@
     >
       <!-- AI Summary (on opposite side) -->
       <div
-        class="ai-summary-wrapper relative z-1 flex items-center justify-center opacity-0 hidden lg:flex will-change-transform"
+        class="ai-summary-wrapper relative z-1 items-center justify-center opacity-0 hidden lg:flex will-change-transform"
       >
         <AISummary v-if="exp.aiSummary" :summary="exp.aiSummary" />
       </div>

@@ -13,7 +13,7 @@ const buttonClasses = computed(() => {
   if (variant === "primary") {
     return "text-foreground shadow-lg shadow-text-primary/20 hover:shadow-xl hover:shadow-text-primary/30 hover:scale-[1.02]";
   }
-  return "border border-border-muted text-accent-foreground/80 hover:border-text-muted hover:text-primary hover:bg-secondary backdrop-blur-sm";
+  return "border border-muted-foreground/20 text-accent-foreground/80 hover:border-text-muted hover:text-primary hover:bg-secondary backdrop-blur-sm";
 });
 </script>
 
