@@ -23,6 +23,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/mdx": "^4.3.13",
+    "@astrojs/netlify": "^6.6.4",
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/vue": "^5.1.4",
     "@react-pdf/renderer": "^4.3.2",
