@@ -1,13 +1,8 @@
 {
-  "main": "dist/_worker.js/index.js",
   "name": "me",
   "compatibility_date": "2026-02-04",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
-  "assets": {
-    "binding": "ASSETS",
-    "directory": "./dist",
-  },
+  "pages_build_output_dir": "./dist",
   "observability": {
-    "enabled": true,
-  },
+    "enabled": true
+  }
 }
