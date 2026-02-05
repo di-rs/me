@@ -1,11 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
 import AnimatedListItem from "@/components/AnimatedListItem.astro";
 
-const aboutEntries = await getCollection("about");
-const aboutEntry = aboutEntries[0]!;
-const { Content } = await aboutEntry.render();
+const aboutEntry = await getEntry("about", "about");
+const { Content } = await aboutEntry!.render();
 ---
 
 <Layout
