@@ -11,6 +11,10 @@ export default defineConfig({
   site: "https://profile.dimaportish.com",
   integrations: [sitemap(), vue(), mdx()],
 
+  prefetch: {
+    prefetchAll: true
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },
