@@ -1,9 +1,12 @@
 ---
 import TechCard from "./TechCard.astro";
 import YearsHighlight from "./YearsHighlight.astro";
-import { techShowcase } from "../content/siteData";
+import { getEntry } from "astro:content";
 
-const { title, startYear, titleSuffix, subtitle, techStacks } = techShowcase;
+const techShowcase = await getEntry("techShowcase", "techShowcase");
+if (!techShowcase) throw new Error("Tech showcase content not found");
+
+const { title, startYear, titleSuffix, subtitle, techStacks } = techShowcase.data;
 ---
 
 <section

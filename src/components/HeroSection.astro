@@ -4,7 +4,10 @@ import ShimmerButton from "./ui/ShimmerButton.vue";
 import { getEntry } from "astro:content";
 
 const hero = await getEntry("hero", "hero");
+if (!hero) throw new Error("Hero content not found");
+
 const social = await getEntry("social", "social");
+if (!social) throw new Error("Social content not found");
 ---
 
 <div class="flex flex-col gap-8">

@@ -4,7 +4,9 @@ import { getEntry } from "astro:content";
 import AnimatedListItem from "@/components/AnimatedListItem.astro";
 
 const aboutEntry = await getEntry("about", "about");
-const { Content } = await aboutEntry!.render();
+if (!aboutEntry) throw new Error("About content not found");
+
+const { Content } = await aboutEntry.render();
 ---
 
 <Layout

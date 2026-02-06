@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import { renderToBuffer, type DocumentProps } from "@react-pdf/renderer";
 import React from "react";
 import { CVDocument } from "../../components/cv/CVDocument";
@@ -10,7 +10,7 @@ import {
   getCurrentRole,
   prepareSummaryContent,
 } from "../../utils/cv";
-import { cvData, social } from "../../content/siteData";
+import { cvData } from "../../content/siteData";
 
 export const GET: APIRoute = async () => {
   try {
@@ -18,6 +18,8 @@ export const GET: APIRoute = async () => {
     const aboutEntries = await getCollection("about");
     const experienceEntries = await getCollection("experiences");
     const educationEntries = await getCollection("education");
+    const socialData = await getEntry("social", "social");
+    if (!socialData) throw new Error("Social content not found");
 
     // Parse about content
     const aboutContent = aboutEntries[0]?.body || "";
@@ -81,9 +83,9 @@ export const GET: APIRoute = async () => {
       name: cvData.name,
       currentRole,
       contact: {
-        email: social.email,
-        linkedin: social.linkedin,
-        github: social.github,
+        email: socialData.data.email,
+        linkedin: socialData.data.linkedin,
+        github: socialData.data.github,
         website: "https://profile.dimaportish.com",
       },
       topSkills: cvData.topSkills,

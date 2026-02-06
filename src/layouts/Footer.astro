@@ -1,23 +1,27 @@
 ---
 import MetallicBorder from "../components/ui/MetallicBorder.vue";
-import { baseData, social } from "../content/siteData";
+import { baseData } from "../content/siteData";
+import { getEntry } from "astro:content";
 import Github from "@/components/icons/Github.astro";
 import Linkedin from "@/components/icons/Linkedin.astro";
 import Email from "@/components/icons/Email.astro";
 
+const social = await getEntry("social", "social");
+if (!social) throw new Error("Social content not found");
+
 const socialList = [
   {
-    href: social.github,
+    href: social.data.github,
     icon: Github,
     label: "GitHub",
   },
   {
-    href: social.linkedin,
+    href: social.data.linkedin,
     icon: Linkedin,
     label: "LinkedIn",
   },
   {
-    href: social.email,
+    href: social.data.email,
     icon: Email,
     label: "Email",
   },

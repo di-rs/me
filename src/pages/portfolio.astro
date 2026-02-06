@@ -1,9 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import type { Experience } from "@/types/experience";
 import { groupExperiencesByCompany } from "@/utils/experience";
+
+const portfolioHeader = await getEntry("portfolioHeader", "portfolioHeader");
+if (!portfolioHeader) throw new Error("Portfolio header content not found");
 
 const experienceEntries = await getCollection("experiences");
 
@@ -45,10 +48,10 @@ const experiences = groupExperiencesByCompany(allExperiences);
         <h2
           class="text-3xl md:text-4xl font-extrabold text-primary mb-1 tracking-tight"
         >
-          Experience
+          {portfolioHeader.data.title}
         </h2>
         <p class="text-sm text-muted-foreground/60 font-normal">
-          My professional journey
+          {portfolioHeader.data.subtitle}
         </p>
       </div>
 

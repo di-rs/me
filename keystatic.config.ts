@@ -150,6 +150,115 @@ export default config({
           label: "End Date",
           validation: { isRequired: true },
         }),
+        keystack: fields.array(
+          fields.text({
+            label: "Technology/Skill",
+          }),
+          {
+            label: "Key Stack",
+            itemLabel: (props) => props.value,
+          },
+        ),
+      },
+    }),
+    experiences: collection({
+      label: "Experiences",
+      path: "src/content/experiences/*",
+      format: { contentField: "content" },
+      slugField: "company",
+      schema: {
+        company: fields.slug({
+          name: {
+            label: "Company",
+            validation: { isRequired: true },
+          },
+        }),
+        role: fields.text({
+          label: "Role",
+          validation: { isRequired: true },
+        }),
+        location: fields.text({
+          label: "Location",
+          validation: { isRequired: true },
+        }),
+        startDate: fields.date({
+          label: "Start Date",
+          validation: { isRequired: true },
+        }),
+        endDate: fields.date({
+          label: "End Date",
+        }),
+        employmentType: fields.select({
+          label: "Employment Type",
+          options: [
+            { label: "On-site", value: "On-site" },
+            { label: "Remote", value: "Remote" },
+            { label: "Hybrid", value: "Hybrid" },
+          ],
+          defaultValue: "Remote",
+        }),
+        linkedinUrl: fields.url({
+          label: "LinkedIn Company URL",
+        }),
+        companyUrl: fields.url({
+          label: "Company Website",
+        }),
+        companyLogo: fields.text({
+          label: "Company Logo Path",
+        }),
+        aiSummary: fields.text({
+          label: "AI Summary",
+          multiline: true,
+        }),
+        technologies: fields.array(
+          fields.text({
+            label: "Technology",
+          }),
+          {
+            label: "Technologies (Visible)",
+            itemLabel: (props) => props.value,
+          },
+        ),
+        technologiesHidden: fields.array(
+          fields.text({
+            label: "Technology",
+          }),
+          {
+            label: "Technologies (Hidden)",
+            itemLabel: (props) => props.value,
+          },
+        ),
+        projectUrls: fields.array(
+          fields.object({
+            name: fields.text({
+              label: "Project Name",
+              validation: { isRequired: true },
+            }),
+            url: fields.url({
+              label: "Project URL",
+              validation: { isRequired: true },
+            }),
+          }),
+          {
+            label: "Project URLs",
+            itemLabel: (props) => props.fields.name.value || "New Project",
+          },
+        ),
+        achievements: fields.array(
+          fields.text({
+            label: "Achievement",
+          }),
+          {
+            label: "Achievements",
+            itemLabel: (props) => props.value,
+          },
+        ),
+        order: fields.integer({
+          label: "Sort Order",
+        }),
+        content: fields.mdx({
+          label: "Description (MDX)",
+        }),
       },
     }),
   },

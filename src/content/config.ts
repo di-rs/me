@@ -71,8 +71,8 @@ const experiences = defineCollection({
     company: z.string(),
     role: z.string(),
     location: z.string(),
-    startDate: z.string(),
-    endDate: z.string().nullable(),
+    startDate: z.coerce.string(),
+    endDate: z.coerce.string().nullable(),
     technologies: z.array(z.string()),
     technologiesHidden: z.array(z.string()).optional(),
     companyLogo: z.string().optional(),
@@ -89,7 +89,7 @@ const experiences = defineCollection({
     achievements: z.array(z.string()).optional(),
     employmentType: z.string().optional(),
     order: z.number().optional(),
-    aiSummary: z.string(),
+    aiSummary: z.string().optional(),
   }),
 });
 
