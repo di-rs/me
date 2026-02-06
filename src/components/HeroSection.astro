@@ -29,7 +29,11 @@ if (!social) throw new Error("Social content not found");
     >
       {hero.data.cta1Label}
     </ShimmerButton>
-    <ShimmerButton client:only="vue" variant="secondary" href={social.data.linkedin}>
+    <ShimmerButton
+      client:only="vue"
+      variant="secondary"
+      href={social.data.linkedin}
+    >
       {hero.data.cta2Label}
     </ShimmerButton>
   </div>

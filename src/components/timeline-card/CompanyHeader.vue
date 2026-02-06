@@ -14,7 +14,9 @@
       </a>
       <span v-else>{{ company }}</span>
     </h3>
-    <span class="text-muted-foreground/40 text-xs sm:text-sm">{{ location }}</span>
+    <span class="text-muted-foreground/40 text-xs sm:text-sm">{{
+      location
+    }}</span>
   </div>
 </template>
 

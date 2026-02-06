@@ -5,7 +5,7 @@ import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import netlify from "@astrojs/netlify";
-import keystatic from '@keystatic/astro'
+import keystatic from "@keystatic/astro";
 import react from "@astrojs/react";
 import markdoc from "@astrojs/markdoc";
 
@@ -15,7 +15,7 @@ export default defineConfig({
   integrations: [sitemap(), vue(), mdx(), react(), markdoc(), keystatic()],
 
   prefetch: {
-    prefetchAll: true
+    prefetchAll: true,
   },
 
   vite: {

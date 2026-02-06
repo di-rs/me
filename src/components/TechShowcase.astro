@@ -6,7 +6,8 @@ import { getEntry } from "astro:content";
 const techShowcase = await getEntry("techShowcase", "techShowcase");
 if (!techShowcase) throw new Error("Tech showcase content not found");
 
-const { title, startYear, titleSuffix, subtitle, techStacks } = techShowcase.data;
+const { title, startYear, titleSuffix, subtitle, techStacks } =
+  techShowcase.data;
 ---
 
 <section

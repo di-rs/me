@@ -9,8 +9,10 @@ interface Props {
 const siteMetadata = await getEntry("siteMetadata", "siteMetadata");
 if (!siteMetadata) throw new Error("Site metadata not found");
 
-const { title = siteMetadata.data.title, description = siteMetadata.data.description } =
-  Astro.props;
+const {
+  title = siteMetadata.data.title,
+  description = siteMetadata.data.description,
+} = Astro.props;
 ---
 
 <head>

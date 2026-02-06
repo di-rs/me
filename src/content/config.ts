@@ -72,7 +72,10 @@ const experiences = defineCollection({
     role: z.string(),
     location: z.string(),
     startDate: z.coerce.string(),
-    endDate: z.coerce.string().nullable(),
+    endDate: z.coerce
+      .string()
+      .nullable()
+      .transform((v) => (v === "undefined" ? undefined : v)),
     technologies: z.array(z.string()),
     technologiesHidden: z.array(z.string()).optional(),
     companyLogo: z.string().optional(),

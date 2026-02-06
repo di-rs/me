@@ -87,7 +87,7 @@ const calculateCompanyDuration = (): string => {
   // Find the earliest start date and latest end date across all roles
   const roles = props.experience.roles;
   const startDates = roles.map((r) => r.startDate);
-  const endDates = roles.map((r) => r.endDate);
+  const endDates = roles.map((r) => r.endDate ?? null);
 
   const earliestStart = startDates.reduce((earliest, current) => {
     return current < earliest ? current : earliest;
