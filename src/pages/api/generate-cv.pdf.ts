@@ -10,7 +10,6 @@ import {
   getCurrentRole,
   prepareSummaryContent,
 } from "../../utils/cv";
-import { cvData } from "../../content/siteData";
 
 export const GET: APIRoute = async () => {
   try {
@@ -20,6 +19,9 @@ export const GET: APIRoute = async () => {
     const educationEntries = await getCollection("education");
     const socialData = await getEntry("social", "social");
     if (!socialData) throw new Error("Social content not found");
+
+    const cvMetadata = await getEntry("cvMetadata", "cvMetadata");
+    if (!cvMetadata) throw new Error("CV metadata not found");
 
     // Parse about content
     const aboutContent = aboutEntries[0]?.body || "";
@@ -49,7 +51,7 @@ export const GET: APIRoute = async () => {
     // Prepare summary content
     const summaryPoints = prepareSummaryContent(
       aboutContent,
-      cvData.summaryIntro,
+      cvMetadata.data.summaryIntro,
     );
 
     // Sort education by start date descending
@@ -80,7 +82,7 @@ export const GET: APIRoute = async () => {
 
     // Prepare CV data object
     const cvDataObject: CVData = {
-      name: cvData.name,
+      name: cvMetadata.data.name,
       currentRole,
       contact: {
         email: socialData.data.email,
@@ -88,8 +90,8 @@ export const GET: APIRoute = async () => {
         github: socialData.data.github,
         website: "https://profile.dimaportish.com",
       },
-      topSkills: cvData.topSkills,
-      languages: cvData.languages,
+      topSkills: cvMetadata.data.topSkills,
+      languages: cvMetadata.data.languages,
       summaryPoints,
       experiences: groupedExperiences,
       education: sortedEducation,

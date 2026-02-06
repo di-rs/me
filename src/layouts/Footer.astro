@@ -1,6 +1,5 @@
 ---
 import MetallicBorder from "../components/ui/MetallicBorder.vue";
-import { baseData } from "../content/siteData";
 import { getEntry } from "astro:content";
 import Github from "@/components/icons/Github.astro";
 import Linkedin from "@/components/icons/Linkedin.astro";
@@ -8,6 +7,9 @@ import Email from "@/components/icons/Email.astro";
 
 const social = await getEntry("social", "social");
 if (!social) throw new Error("Social content not found");
+
+const siteMetadata = await getEntry("siteMetadata", "siteMetadata");
+if (!siteMetadata) throw new Error("Site metadata not found");
 
 const socialList = [
   {
@@ -38,7 +40,7 @@ const socialList = [
         &copy; <span id="copyright-year"
           >{new Date().getFullYear().toString()}</span
         >
-        {baseData.author}
+        {siteMetadata.data.author}
       </div>
 
       <div class="flex items-center gap-6">

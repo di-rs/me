@@ -121,6 +121,65 @@ export default config({
         }),
       },
     }),
+    siteMetadata: singleton({
+      label: "Site Metadata",
+      path: "src/content/siteMetadata/siteMetadata",
+      schema: {
+        title: fields.text({
+          label: "Site Title",
+          validation: { isRequired: true },
+        }),
+        description: fields.text({
+          label: "Site Description",
+          multiline: true,
+          validation: { isRequired: true },
+        }),
+        author: fields.text({
+          label: "Author",
+          validation: { isRequired: true },
+        }),
+      },
+    }),
+    cvMetadata: singleton({
+      label: "CV Metadata",
+      path: "src/content/cvMetadata/cvMetadata",
+      schema: {
+        name: fields.text({
+          label: "Full Name",
+          validation: { isRequired: true },
+        }),
+        summaryIntro: fields.text({
+          label: "Summary Introduction",
+          multiline: true,
+          validation: { isRequired: true },
+        }),
+        topSkills: fields.array(
+          fields.text({
+            label: "Skill",
+          }),
+          {
+            label: "Top Skills",
+            itemLabel: (props) => props.value,
+          },
+        ),
+        languages: fields.array(
+          fields.object({
+            name: fields.text({
+              label: "Language",
+              validation: { isRequired: true },
+            }),
+            level: fields.text({
+              label: "Proficiency Level",
+              validation: { isRequired: true },
+            }),
+          }),
+          {
+            label: "Languages",
+            itemLabel: (props) => props.fields.name.value || "New Language",
+          },
+        ),
+      },
+    }),
   },
   collections: {
     education: collection({

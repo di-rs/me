@@ -93,6 +93,30 @@ const experiences = defineCollection({
   }),
 });
 
+const siteMetadata = defineCollection({
+  type: "data",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    author: z.string(),
+  }),
+});
+
+const cvMetadata = defineCollection({
+  type: "data",
+  schema: z.object({
+    name: z.string(),
+    summaryIntro: z.string(),
+    topSkills: z.array(z.string()),
+    languages: z.array(
+      z.object({
+        name: z.string(),
+        level: z.string(),
+      }),
+    ),
+  }),
+});
+
 export const collections = {
   experiences,
   about,
@@ -101,4 +125,6 @@ export const collections = {
   social,
   techShowcase,
   portfolioHeader,
+  siteMetadata,
+  cvMetadata,
 };

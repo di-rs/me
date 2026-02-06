@@ -1,11 +1,13 @@
 import { format, intervalToDuration, addMonths } from "date-fns";
 
 /**
- * Formats a date string in YYYY-MM format to a readable format (e.g., "Jan 2023")
+ * Formats a date string in YYYY-MM or YYYY-MM-DD format to a readable format (e.g., "Jan 2023")
  */
 export function formatDate(dateStr: string): string {
-  const [year, month] = dateStr.split("-");
-  // Parse YYYY-MM format to a Date object (using day 1 of the month)
+  const parts = dateStr.split("-");
+  const year = parts[0];
+  const month = parts[1];
+  // Parse to a Date object (using day 1 of the month)
   const date = new Date(parseInt(year ?? "0"), parseInt(month ?? "1") - 1, 1);
   return format(date, "MMM yyyy");
 }
@@ -25,18 +27,23 @@ export function formatDateRange(
 /**
  * Calculates the duration between two dates and returns a human-readable string
  * Duration includes both start and end months (e.g., Oct 2025 to Jan 2026 = 4 months)
+ * Accepts YYYY-MM or YYYY-MM-DD format
  */
 export function calculateDurationBetween(
   startDate: string,
   endDate: string | null | undefined,
 ): string {
-  const [startYear, startMonth] = startDate.split("-").map(Number);
-  const start = new Date(startYear ?? 0, (startMonth ?? 1) - 1, 1);
+  const startParts = startDate.split("-").map(Number);
+  const startYear = startParts[0] ?? 0;
+  const startMonth = startParts[1] ?? 1;
+  const start = new Date(startYear, startMonth - 1, 1);
 
   let end: Date;
   if (endDate) {
-    const [endYear, endMonth] = endDate.split("-").map(Number);
-    end = new Date(endYear ?? 0, (endMonth ?? 1) - 1, 1);
+    const endParts = endDate.split("-").map(Number);
+    const endYear = endParts[0] ?? 0;
+    const endMonth = endParts[1] ?? 1;
+    end = new Date(endYear, endMonth - 1, 1);
   } else {
     // Use current date for "Present"
     const now = new Date();
