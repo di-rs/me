@@ -3,8 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
 import { getCollection, getEntry } from "astro:content";
 import type { Experience } from "@/types/experience";
-import { groupExperiencesByCompany } from "@/utils/experience";
-import { format } from "date-fns";
+import { groupExperiencesByCompany, mapContentDates } from "@/utils/experience";
 
 const portfolioHeader = await getEntry("portfolioHeader", "portfolioHeader");
 if (!portfolioHeader) throw new Error("Portfolio header content not found");
@@ -12,7 +11,7 @@ if (!portfolioHeader) throw new Error("Portfolio header content not found");
 const experienceEntries = await getCollection("experiences");
 
 const allExperiences: Experience[] = experienceEntries
-  .sort((a, b) => {
+  .toSorted((a, b) => {
     return (b.data.order || 0) - (a.data.order || 0);
   })
   .map((entry) => {
@@ -29,10 +28,7 @@ const allExperiences: Experience[] = experienceEntries
     return {
       id: entry.id,
       ...entry.data,
-      startDate: format(entry.data.startDate, "yyyy-MM"),
-      endDate: entry.data.endDate
-        ? format(entry.data.endDate, "yyyy-MM")
-        : null,
+      ...mapContentDates(entry.data),
       description,
     };
   });

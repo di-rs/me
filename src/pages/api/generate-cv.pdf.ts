@@ -4,12 +4,11 @@ import { renderToBuffer, type DocumentProps } from "@react-pdf/renderer";
 import React from "react";
 import { CVDocument } from "../../components/cv/CVDocument";
 import type { CVData } from "../../components/cv/CVDocument";
-import { groupExperiencesByCompany } from "../../utils/experience";
 import {
-  sortExperiencesByDate,
-  getCurrentRole,
-  prepareSummaryContent,
-} from "../../utils/cv";
+  groupExperiencesByCompany,
+  mapContentDates,
+} from "../../utils/experience";
+import { getCurrentRole, prepareSummaryContent } from "../../utils/cv";
 
 export const GET: APIRoute = async () => {
   try {
@@ -26,19 +25,23 @@ export const GET: APIRoute = async () => {
     // Parse about content
     const aboutContent = aboutEntries[0]?.body || "";
 
-    // Sort experiences by date (most recent first)
-    const sortedExperiences = sortExperiencesByDate(experienceEntries);
-
-    // Transform experiences to include description from body
-    const experiencesWithDescription = sortedExperiences.map((exp) => ({
-      ...exp.data,
-      id: exp.id,
-      description: (exp.body || "")
-        .split("\n")
-        .filter((line) => line.trim())
-        .map((line) => line.replace(/^[-*]\s*/, "").trim())
-        .filter(Boolean),
-    }));
+    // Transform experiences to include description from body and convert dates
+    const experiencesWithDescription = experienceEntries
+      .toSorted((a, b) => {
+        return (b.data.order || 0) - (a.data.order || 0);
+      })
+      .map((exp) => {
+        return {
+          ...exp.data,
+          id: exp.id,
+          ...mapContentDates(exp.data),
+          description: (exp.body || "")
+            .split("\n")
+            .filter((line) => line.trim())
+            .map((line) => line.replace(/^[-*]\s*/, "").trim())
+            .filter(Boolean),
+        };
+      });
 
     // Group experiences by company
     const groupedExperiences = groupExperiencesByCompany(
@@ -57,6 +60,8 @@ export const GET: APIRoute = async () => {
     // Sort education by start date descending
     const sortedEducation = educationEntries
       .map((edu) => {
+        const dates = mapContentDates(edu.data);
+
         const entry: {
           institution: string;
           degree: string;
@@ -67,8 +72,7 @@ export const GET: APIRoute = async () => {
         } = {
           institution: edu.data.institution,
           degree: edu.data.degree,
-          startDate: edu.data.startDate,
-          endDate: edu.data.endDate,
+          ...dates,
           ...(edu.data.field !== undefined && { field: edu.data.field }),
           ...(edu.data.location !== undefined && {
             location: edu.data.location,
