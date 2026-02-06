@@ -7,16 +7,61 @@ const about = defineCollection({
   }),
 });
 
+const hero = defineCollection({
+  type: "data",
+  schema: z.object({
+    greeting: z.string(),
+    description: z.string(),
+    cta1Label: z.string(),
+    cta1Link: z.string(),
+    cta1Download: z.string().optional(),
+    cta2Label: z.string(),
+  }),
+});
+
+const social = defineCollection({
+  type: "data",
+  schema: z.object({
+    github: z.string().url(),
+    linkedin: z.string().url(),
+    email: z.string(),
+  }),
+});
+
+const techShowcase = defineCollection({
+  type: "data",
+  schema: z.object({
+    title: z.string(),
+    startYear: z.number(),
+    titleSuffix: z.string(),
+    subtitle: z.string(),
+    techStacks: z.array(
+      z.object({
+        technologies: z.array(z.string()),
+      }),
+    ),
+  }),
+});
+
+const portfolioHeader = defineCollection({
+  type: "data",
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string(),
+  }),
+});
+
 const education = defineCollection({
-  type: "content",
+  type: "data",
   schema: z.object({
     institution: z.string(),
     degree: z.string(),
     field: z.string().optional(),
     location: z.string().optional(),
-    startDate: z.string(),
-    endDate: z.string().nullable(),
+    startDate: z.coerce.string(),
+    endDate: z.coerce.string().nullable(),
     description: z.string().optional(),
+    keystack: z.array(z.string()).optional(),
   }),
 });
 
@@ -48,4 +93,12 @@ const experiences = defineCollection({
   }),
 });
 
-export const collections = { experiences, about, education };
+export const collections = {
+  experiences,
+  about,
+  education,
+  hero,
+  social,
+  techShowcase,
+  portfolioHeader,
+};
