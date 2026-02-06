@@ -1,13 +1,18 @@
 ---
-import { baseData } from "@/content/siteData";
+import { getEntry } from "astro:content";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { title = baseData.title, description = baseData.description } =
-  Astro.props;
+const siteMetadata = await getEntry("siteMetadata", "siteMetadata");
+if (!siteMetadata) throw new Error("Site metadata not found");
+
+const {
+  title = siteMetadata.data.title,
+  description = siteMetadata.data.description,
+} = Astro.props;
 ---
 
 <head>

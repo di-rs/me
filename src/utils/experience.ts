@@ -1,4 +1,5 @@
 import type { Experience, GroupedExperience } from "@/types/experience";
+import { format } from "date-fns";
 
 export type DisplayExperience = Experience | GroupedExperience;
 
@@ -53,4 +54,21 @@ export function groupExperiencesByCompany(
   }
 
   return result;
+}
+
+/**
+ * Maps experience entry dates from Date objects to YYYY-MM string format
+ * Useful for normalizing Keystatic date fields for display and processing
+ */
+export function mapContentDates({
+  startDate,
+  endDate,
+}: {
+  startDate: string;
+  endDate?: string | null | undefined;
+}) {
+  return {
+    startDate: format(startDate, "yyyy-MM"),
+    endDate: endDate ? format(endDate, "yyyy-MM") : null,
+  };
 }

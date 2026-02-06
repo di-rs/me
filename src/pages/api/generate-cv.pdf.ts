@@ -1,16 +1,14 @@
 import type { APIRoute } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import { renderToBuffer, type DocumentProps } from "@react-pdf/renderer";
 import React from "react";
 import { CVDocument } from "../../components/cv/CVDocument";
 import type { CVData } from "../../components/cv/CVDocument";
-import { groupExperiencesByCompany } from "../../utils/experience";
 import {
-  sortExperiencesByDate,
-  getCurrentRole,
-  prepareSummaryContent,
-} from "../../utils/cv";
-import { cvData, social } from "../../content/siteData";
+  groupExperiencesByCompany,
+  mapContentDates,
+} from "../../utils/experience";
+import { getCurrentRole, prepareSummaryContent } from "../../utils/cv";
 
 export const GET: APIRoute = async () => {
   try {
@@ -18,23 +16,32 @@ export const GET: APIRoute = async () => {
     const aboutEntries = await getCollection("about");
     const experienceEntries = await getCollection("experiences");
     const educationEntries = await getCollection("education");
+    const socialData = await getEntry("social", "social");
+    if (!socialData) throw new Error("Social content not found");
+
+    const cvMetadata = await getEntry("cvMetadata", "cvMetadata");
+    if (!cvMetadata) throw new Error("CV metadata not found");
 
     // Parse about content
     const aboutContent = aboutEntries[0]?.body || "";
 
-    // Sort experiences by date (most recent first)
-    const sortedExperiences = sortExperiencesByDate(experienceEntries);
-
-    // Transform experiences to include description from body
-    const experiencesWithDescription = sortedExperiences.map((exp) => ({
-      ...exp.data,
-      id: exp.id,
-      description: (exp.body || "")
-        .split("\n")
-        .filter((line) => line.trim())
-        .map((line) => line.replace(/^[-*]\s*/, "").trim())
-        .filter(Boolean),
-    }));
+    // Transform experiences to include description from body and convert dates
+    const experiencesWithDescription = experienceEntries
+      .toSorted((a, b) => {
+        return (b.data.order || 0) - (a.data.order || 0);
+      })
+      .map((exp) => {
+        return {
+          ...exp.data,
+          id: exp.id,
+          ...mapContentDates(exp.data),
+          description: (exp.body || "")
+            .split("\n")
+            .filter((line) => line.trim())
+            .map((line) => line.replace(/^[-*]\s*/, "").trim())
+            .filter(Boolean),
+        };
+      });
 
     // Group experiences by company
     const groupedExperiences = groupExperiencesByCompany(
@@ -47,12 +54,14 @@ export const GET: APIRoute = async () => {
     // Prepare summary content
     const summaryPoints = prepareSummaryContent(
       aboutContent,
-      cvData.summaryIntro,
+      cvMetadata.data.summaryIntro,
     );
 
     // Sort education by start date descending
     const sortedEducation = educationEntries
       .map((edu) => {
+        const dates = mapContentDates(edu.data);
+
         const entry: {
           institution: string;
           degree: string;
@@ -63,8 +72,7 @@ export const GET: APIRoute = async () => {
         } = {
           institution: edu.data.institution,
           degree: edu.data.degree,
-          startDate: edu.data.startDate,
-          endDate: edu.data.endDate,
+          ...dates,
           ...(edu.data.field !== undefined && { field: edu.data.field }),
           ...(edu.data.location !== undefined && {
             location: edu.data.location,
@@ -78,16 +86,16 @@ export const GET: APIRoute = async () => {
 
     // Prepare CV data object
     const cvDataObject: CVData = {
-      name: cvData.name,
+      name: cvMetadata.data.name,
       currentRole,
       contact: {
-        email: social.email,
-        linkedin: social.linkedin,
-        github: social.github,
+        email: socialData.data.email,
+        linkedin: socialData.data.linkedin,
+        github: socialData.data.github,
         website: "https://profile.dimaportish.com",
       },
-      topSkills: cvData.topSkills,
-      languages: cvData.languages,
+      topSkills: cvMetadata.data.topSkills,
+      languages: cvMetadata.data.languages,
       summaryPoints,
       experiences: groupedExperiences,
       education: sortedEducation,

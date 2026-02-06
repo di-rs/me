@@ -1,10 +1,11 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
 import AnimatedListItem from "@/components/AnimatedListItem.astro";
 
-const aboutEntries = await getCollection("about");
-const aboutEntry = aboutEntries[0]!;
+const aboutEntry = await getEntry("about", "about");
+if (!aboutEntry) throw new Error("About content not found");
+
 const { Content } = await aboutEntry.render();
 ---
 

@@ -60,7 +60,7 @@ export function prepareSummaryContent(
  */
 export function formatDateRangeWithDuration(
   startDate: string,
-  endDate: string | null,
+  endDate: string | null | undefined,
 ): string {
   const dateRange = formatDateRange(startDate, endDate);
   const duration = calculateDurationBetween(startDate, endDate);
@@ -87,27 +87,4 @@ export function calculateCompanyDuration(roles: Experience[]): string {
   const latestEnd = lastRole.endDate;
 
   return calculateDurationBetween(earliestStart, latestEnd);
-}
-
-/**
- * Sorts experiences by most recent first (for CV display)
- * Uses order field as secondary sort when dates are the same
- */
-export function sortExperiencesByDate(
-  experiences: CollectionEntry<"experiences">[],
-): CollectionEntry<"experiences">[] {
-  return [...experiences].sort((a, b) => {
-    const dateA = a.data.endDate || "9999-99"; // Current roles sort first
-    const dateB = b.data.endDate || "9999-99";
-    const dateComparison = dateB.localeCompare(dateA);
-
-    // If dates are the same, use order field (lower order = higher priority)
-    if (dateComparison === 0) {
-      const orderA = a.data.order ?? 999; // Default to high number if no order
-      const orderB = b.data.order ?? 999;
-      return orderA - orderB;
-    }
-
-    return dateComparison;
-  });
 }

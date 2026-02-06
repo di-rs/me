@@ -1,0 +1,6 @@
+greeting: "Hi, I'm Dima 👋"
+description: "Web and AI proficient Software Engineer with a passion to imperfection and productivity."
+cta1Label: "Download CV"
+cta1Link: "/api/generate-cv.pdf"
+cta1Download: "Dmitriy_Popov_CV.pdf"
+cta2Label: "Let's Connect"
